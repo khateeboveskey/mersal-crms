@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hiding vue devtools floating panel */
+#vue-inspector-container,
+#__vue-devtools-container__ {
+    display: none;
+}
