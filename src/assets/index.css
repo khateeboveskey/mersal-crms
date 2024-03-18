@@ -7,3 +7,12 @@
 #__vue-devtools-container__ {
     display: none;
 }
+
+@font-face {
+    font-family: 'RB';
+    src: url('./fonts/RB.woff2') format('woff2')
+}
+
+* {
+    font-family: 'RB', Arial, sans-serif;
+}
