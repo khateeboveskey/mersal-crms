@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 export const useIconsSettingStore = defineStore('settings', {
     state: () => {
         return {
-            tailwindSize: 6,
+            sizeInRem: 1.5,
             tailwindColor: 'slate-600'
         };
     }

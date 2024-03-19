@@ -1,5 +1,3 @@
 <template>
-    <div class="bg-green-300 h-screen">
-        this is contact view
-    </div>
+    <div class="h-screen bg-green-300">this is contact view</div>
 </template>
