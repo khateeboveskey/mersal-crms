@@ -1,9 +1,9 @@
 <template>
-    <main class="flex flex-row flex-nowrap overflow-hidden">
-        <aside
-            class="right-0 flex h-screen w-fit flex-col justify-between rounded-e-xl bg-slate-900 px-4">
-            <section>
-                <BrandIdentity class="my-4 text-slate-50">
+    <main class="flex flex-col flex-nowrap overflow-hidden md:flex-row">
+        <nav
+            class="absolute bottom-0 z-10 flex h-fit w-screen flex-row justify-between rounded-t-xl bg-slate-900 px-4 md:static md:right-0 md:h-screen md:w-fit md:flex-col md:rounded-e-xl">
+            <section class="w-full justify-between align-middle">
+                <BrandIdentity>
                     <template #logo>م</template>
                     <template #name>مِرسال</template>
                 </BrandIdentity>
@@ -20,7 +20,7 @@
                     </RouterLink>
                 </TabsGroup>
             </section>
-            <section>
+            <section class="hidden md:block">
                 <AppSidebarLinks>
                     <a
                         class="rounded-lg bg-transparent p-4 text-slate-500 hover:bg-slate-800"
@@ -30,7 +30,7 @@
                     </a>
                 </AppSidebarLinks>
             </section>
-        </aside>
+        </nav>
         <main class="w-full">
             <RouterView />
         </main>

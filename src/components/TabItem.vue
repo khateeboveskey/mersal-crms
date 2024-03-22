@@ -1,10 +1,11 @@
 <template>
-    <div class="flex flex-row items-center px-4 py-2">
-        <span :style="`width: ${setting.sizeInRem}rem`" :class="`me-2`">
+    <div class="flex flex-row items-center p-4 md:py-2">
+        <span :style="`width: ${setting.sizeInRem}rem`" :class="`md:me-2`">
             <!-- Icon Slot -->
             <slot></slot>
         </span>
-        <span class="text-nowrap text-lg">{{ props.title }}</span>
+        <!-- Tab Title -->
+        <span class="hidden text-nowrap text-lg md:block">{{ props.title }}</span>
     </div>
 </template>
 
