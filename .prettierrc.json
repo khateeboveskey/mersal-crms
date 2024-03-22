@@ -6,6 +6,6 @@
     "printWidth": 100,
     "trailingComma": "none",
     "plugins": ["prettier-plugin-tailwindcss"],
-    "htmlWhitespaceSensitivity": "css",
+    "htmlWhitespaceSensitivity": "ignore",
     "bracketSameLine": true
 }

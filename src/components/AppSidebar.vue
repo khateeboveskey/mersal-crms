@@ -1,22 +1,35 @@
 <template>
-    <main class="flex flex-row flex-nowrap">
-        <aside class="right-0 h-screen w-fit rounded-e-xl bg-slate-900 p-2">
-            <BrandIdentity class="m-7 text-slate-50">
-                <template #logo>م </template>
-                <template #name>مِرسال</template>
-            </BrandIdentity>
-            <TabsGroup>
-                <RouterLink
-                    v-for="tab in tabs"
-                    :key="tab.route"
-                    :to="tab.route"
-                    :class="routerLinkClasses"
-                    :active-class="routerLinkActiveClasses">
-                    <TabItem :title="tab.title">
-                        <component :is="tab.icon"></component>
-                    </TabItem>
-                </RouterLink>
-            </TabsGroup>
+    <main class="flex flex-row flex-nowrap overflow-hidden">
+        <aside
+            class="right-0 flex h-screen w-fit flex-col justify-between rounded-e-xl bg-slate-900 px-4">
+            <section>
+                <BrandIdentity class="my-4 text-slate-50">
+                    <template #logo>م</template>
+                    <template #name>مِرسال</template>
+                </BrandIdentity>
+                <TabsGroup>
+                    <RouterLink
+                        v-for="tab in tabs"
+                        :key="tab.route"
+                        :to="tab.route"
+                        :class="routerLinkClasses"
+                        :active-class="routerLinkActiveClasses">
+                        <TabItem :title="tab.title">
+                            <component :is="tab.icon"></component>
+                        </TabItem>
+                    </RouterLink>
+                </TabsGroup>
+            </section>
+            <section>
+                <AppSidebarLinks>
+                    <a
+                        class="rounded-lg bg-transparent p-4 text-slate-500 hover:bg-slate-800"
+                        href="https://github.com/khateeboveskey/mersal-crms"
+                        target="_blank">
+                        <BrandGithub class="w-7" />
+                    </a>
+                </AppSidebarLinks>
+            </section>
         </aside>
         <main class="w-full">
             <RouterView />
@@ -32,6 +45,8 @@ import { RouterLink, RouterView } from 'vue-router';
 import BrandIdentity from './BrandIdentity.vue';
 import TabsGroup from './TabsGroup.vue';
 import TabItem from './TabItem.vue';
+import AppSidebarLinks from './AppSidebarLinks.vue';
+import BrandGithub from './icons/BrandGithub.vue';
 
 // Icons
 import ChartDonut from './icons/ChartDonut.vue';
