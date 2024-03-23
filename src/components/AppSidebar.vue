@@ -72,13 +72,13 @@ const tabs = [
     }
 ];
 const routerLinkClasses = 'hover:bg-slate-800 rounded-lg text-slate-600';
-// [x] fix `hover:bg-primary-500` not working
+// [x] fix `hover:bg-indigo-700` not working
 const routerLinkActiveClasses =
-    'active-router-link bg-primary-500 text-white shadow-lg shadow-primary-700';
+    'active-router-link bg-indigo-700 text-white shadow-lg shadow-indigo-900';
 </script>
 
 <style>
 .active-router-link:hover {
-    @apply bg-primary-500;
+    @apply bg-indigo-700;
 }
 </style>
