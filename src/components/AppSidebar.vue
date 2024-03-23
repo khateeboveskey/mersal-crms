@@ -1,10 +1,12 @@
 <template>
     <main class="flex flex-col flex-nowrap overflow-hidden md:flex-row">
         <nav
-            class="absolute bottom-0 z-10 flex h-fit w-screen flex-row justify-between rounded-t-xl bg-slate-900 px-4 md:static md:right-0 md:h-screen md:w-fit md:flex-col md:rounded-e-xl">
+            class="absolute bottom-0 z-10 flex h-fit w-screen flex-row justify-between rounded-t-xl bg-slate-900 px-4 md:static md:right-0 md:h-screen md:w-fit md:flex-col md:rounded-none md:rounded-e-xl">
             <section class="w-full justify-between align-middle">
                 <BrandIdentity>
-                    <template #logo>م</template>
+                    <template #logo>
+                        <MersalLogo class="me-2 w-11" />
+                    </template>
                     <template #name>مِرسال</template>
                 </BrandIdentity>
                 <TabsGroup>
@@ -52,6 +54,7 @@ import BrandGithub from './icons/BrandGithub.vue';
 import ChartDonut from './icons/ChartDonut.vue';
 import TwoUsers from './icons/TwoUsers.vue';
 import DealTag from './icons/DealTag.vue';
+import MersalLogo from '@/assets/imgs/MersalLogo.vue';
 
 // Data
 const tabs = [
