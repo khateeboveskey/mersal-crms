@@ -6,6 +6,9 @@ hero:
   name: "Mersal"
   text: "CRM System"
   tagline: An open-source CRM client.
+  image:
+    src: ./src/assets/imgs/Logo.svg
+    alt: Mersal Logo
   actions:
     - theme: brand
       text: Get Started
@@ -44,15 +47,6 @@ const members = [
     avatar: 'https://www.github.com/yyx990803.png',
     name: 'Mahmood Ahmed',
     title: 'Backend Developer',
-    links: [
-      { icon: 'github', link: 'https://github.com/yyx990803' },
-      { icon: 'twitter', link: 'https://twitter.com/youyuxi' }
-    ]
-  },
-  {
-    avatar: 'https://www.github.com/yyx990803.png',
-    name: 'Evan You',
-    title: 'Creator',
     links: [
       { icon: 'github', link: 'https://github.com/yyx990803' },
       { icon: 'twitter', link: 'https://twitter.com/youyuxi' }

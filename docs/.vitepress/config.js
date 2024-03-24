@@ -11,6 +11,8 @@ export default defineConfig({
             { text: 'Examples', link: '/markdown-examples' }
         ],
 
+        logo: '../src/assets/imgs/Logo.svg',
+
         sidebar: [
             {
                 text: 'Getting Started',
@@ -26,5 +28,6 @@ export default defineConfig({
         //     level: 'deep'
         // },
         socialLinks: [{ icon: 'github', link: 'https://github.com/khateeboveskey/mersal-crms' }]
-    }
+    },
+    head: [['link', { rel: 'icon', href: '../src/assets/imgs/Logo.svg' }]]
 });

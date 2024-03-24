@@ -6,4 +6,7 @@
     --vp-c-brand-1: var(--mersal-primary-500);
     --vp-c-brand-2: var(--mersal-primary-600);
     --vp-c-brand-3: var(--mersal-primary-500);
+
+    --vp-home-hero-image-background-image: url('src/assets/imgs/Logo.svg');
+    --vp-home-hero-image-filter: blur(100px);
 }
