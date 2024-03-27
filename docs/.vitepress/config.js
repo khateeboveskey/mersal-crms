@@ -15,12 +15,12 @@ export default defineConfig({
 
         sidebar: [
             {
-                text: 'Getting Started',
-                items: [
-                    { text: 'Installation', link: '/installation' },
-                    { text: 'Markdown Examples', link: '/markdown-examples' },
-                    { text: 'Runtime API Examples', link: '/api-examples' }
-                ]
+                text: '✨ Getting Started',
+                items: [{ text: 'Installation', link: '/installation' }]
+            },
+            {
+                text: '💻 Further Development',
+                items: [{ text: 'Contributing', link: '/CONTRIBUTING' }]
             }
         ],
 
