@@ -24,6 +24,12 @@ npm install
 npm run dev
 ```
 
+**in parallel** with *json-server* to test API
+
+```sh
+npx json-server --watch ./data/fakeDB.json
+```
+
 ### Compile and Minify for Production
 
 ```sh
