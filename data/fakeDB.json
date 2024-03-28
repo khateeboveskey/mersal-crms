@@ -1,0 +1,28 @@
+{
+    "contacts": [
+        {
+            "name": "عبدالرحمن الخطيب",
+            "phoneNo": "776218541",
+            "email": "khateeboveskey@gmail.com",
+            "address": "المنصورة",
+            "interests": ["بحري", "حق مزوجين"],
+            "birthDate": "3/7/2003"
+        },
+        {
+            "name": "محمود أحمد",
+            "phoneNo": "737396343",
+            "email": "mahmood@gmail.com",
+            "address": "المنصورة",
+            "interests": ["مقليات", "بيتزا", "كرسبي"],
+            "birthDate": "3/7/2003"
+        },
+        {
+            "name": "حسين علي",
+            "phoneNo": "773478347",
+            "email": "hussainali@gmail.com",
+            "address": "السنافر",
+            "interests": ["بحري", "حق مزوجين"],
+            "birthDate": "3/7/2003"
+        }
+    ]
+}

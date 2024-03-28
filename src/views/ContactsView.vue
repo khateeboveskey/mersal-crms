@@ -24,7 +24,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+                    <tr
+                        v-for="(contact, index) in contacts"
+                        :key="contact.id"
+                        class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                         <td class="w-4 p-4">
                             <div class="flex items-center">
                                 <input
@@ -41,14 +44,17 @@
                             class="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white">
                             <img
                                 class="h-10 w-10 rounded-full"
-                                src="https://i.pravatar.cc/100"
-                                alt="Jese image" />
+                                :src="`https://i.pravatar.cc/100?img=${index}`" />
                             <div class="ps-3">
-                                <div class="mb-1 text-base font-semibold">فلان الفلاني</div>
-                                <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
+                                <div class="mb-1 text-base font-semibold">{{ contact.name }}</div>
+                                <a target="_blank" :href="'mailto:' + contact.email">
+                                    <div class="font-normal text-gray-500 hover:underline">
+                                        {{ contact.email }}
+                                    </div>
+                                </a>
                             </div>
                         </th>
-                        <td class="px-6 py-4">776218541</td>
+                        <td class="px-6 py-4">{{ contact.phoneNo }}</td>
                         <td class="px-6 py-4">
                             <div class="flex items-center">
                                 <a target="_blank" class="rounded-lg p-2 hover:bg-gray-700" href="">
@@ -59,12 +65,14 @@
                                 </a>
                             </div>
                         </td>
-                        <td class="px-6 py-4">3/7/2003</td>
-                        <td class="px-6 py-4">عدن - المنصورة</td>
+                        <td class="px-6 py-4">{{ contact.birthDate }}</td>
+                        <td class="px-6 py-4">{{ contact.address }}</td>
                         <td class="px-6 py-4">
                             <span
-                                class="me-2 inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-900 dark:text-gray-300">
-                                بحري
+                                v-for="interest in contact.interests"
+                                :key="interest"
+                                class="mb-1 me-1 inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                                {{ interest }}
                             </span>
                         </td>
                         <td class="px-6 py-4">
@@ -76,6 +84,8 @@
                                     تعديل
                                 </button>
                                 <button
+                                    data-modal-target="delete-modal"
+                                    data-modal-toggle="delete-modal"
                                     type="button"
                                     class="dark:text-red inline-flex items-center rounded-e-lg border border-s-0 border-red-500 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-500 hover:text-red-700 focus:z-10 focus:text-red-700 focus:ring-2 focus:ring-red-700 dark:border-gray-700 dark:hover:bg-red-950 dark:hover:text-red-500 dark:focus:text-red-500 dark:focus:ring-red-500">
                                     <DeleteTrash class="me-2" />
@@ -88,11 +98,41 @@
             </table>
         </div>
     </div>
+    <ModalComponent id="delete-modal" />
 </template>
 
 <script setup>
+// Icons
 import DeleteTrash from '../components/icons/DeleteTrash.vue';
 import EditPen from '../components/icons/EditPen.vue';
 import LogoInstagram from '../components/icons/LogoInstagram.vue';
 import LogoFacebook from '../components/icons/LogoFacebook.vue';
+
+// Components
+import ModalComponent from '../components/ModalComponent.vue';
+
+// Libraries
+import axios from 'redaxios';
+
+// Vue's
+import { onMounted, ref } from 'vue';
+
+// Data
+const contacts = ref(null);
+
+// Methods
+async function fetchData() {
+    try {
+        const res = await axios('http://localhost:3000/contacts');
+        const data = res.data;
+        contacts.value = data;
+    } catch (error) {
+        console.error('Axios error: ' + error);
+    }
+}
+
+// Lifecycle Hooks
+onMounted(() => {
+    fetchData();
+});
 </script>
