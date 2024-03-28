@@ -27,7 +27,7 @@
                     class="rounded-lg bg-transparent p-4 text-slate-500 hover:bg-slate-800"
                     href="https://github.com/khateeboveskey/mersal-crms"
                     target="_blank">
-                    <BrandGithub class="w-7" />
+                    <LogoGithub class="w-7" />
                 </a>
             </AppSidebarLinks>
         </section>
@@ -42,7 +42,7 @@ import BrandIdentity from './BrandIdentity.vue';
 import TabsGroup from './TabsGroup.vue';
 import TabItem from './TabItem.vue';
 import AppSidebarLinks from './AppSidebarLinks.vue';
-import BrandGithub from './icons/BrandGithub.vue';
+import LogoGithub from './icons/LogoGithub.vue';
 
 // Icons
 import ChartDonut from './icons/ChartDonut.vue';
@@ -70,7 +70,7 @@ const tabs = [
 ];
 const routerLinkClasses = 'hover:bg-slate-800 rounded-lg text-slate-600';
 const routerLinkActiveClasses =
-    'active-router-link bg-primary-700 text-white shadow-lg shadow-primary-900';
+    'active-router-link hover:bg-primary-700 bg-primary-700 text-white shadow-lg shadow-primary-900';
 </script>
 
 <style>

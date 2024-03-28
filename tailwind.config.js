@@ -5,7 +5,8 @@ export default {
     content: [
         './index.html',
         './src/**/*.{vue,js,ts,jsx,tsx,svg}',
-        './docs/**/*.{vue,js,ts,jsx,tsx,svg}'
+        './docs/**/*.{vue,js,ts,jsx,tsx,svg}',
+        './node_modules/flowbite/**/*.js'
     ],
     theme: {
         colors: {
@@ -20,5 +21,6 @@ export default {
     extends: {
         colors: colors
     },
-    plugins: []
+    // eslint-disable-next-line no-undef
+    plugins: [require('flowbite/plugin')]
 };
