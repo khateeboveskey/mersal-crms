@@ -1,4 +1,4 @@
-# Mersal CRMS
+# 📧 Mersal CRMS
 
 Mersal Customer Relationship Management System
 
@@ -24,6 +24,12 @@ npm install
 npm run dev
 ```
 
+**in parallel** with *json-server* to test API
+
+```sh
+npx json-server --watch ./data/fakeDB.json
+```
+
 ### Compile and Minify for Production
 
 ```sh
@@ -35,3 +41,11 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## 🗺 Roadmap
+
+- [x] Create a fake json DB
+- [x] Add Axios (redaxios added actually!)
+- [ ] Fixing Flowbite modal
+- [ ] Refactoring Compononets
+- [ ] Make a `useFetch.js` composable
