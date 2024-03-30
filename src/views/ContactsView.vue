@@ -84,8 +84,7 @@
                                     تعديل
                                 </button>
                                 <button
-                                    data-modal-target="delete-modal"
-                                    data-modal-toggle="delete-modal"
+                                    @click="showModal = !showModal"
                                     type="button"
                                     class="dark:text-red inline-flex items-center rounded-e-lg border border-s-0 border-red-500 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-500 hover:text-red-700 focus:z-10 focus:text-red-700 focus:ring-2 focus:ring-red-700 dark:border-gray-700 dark:hover:bg-red-950 dark:hover:text-red-500 dark:focus:text-red-500 dark:focus:ring-red-500">
                                     <DeleteTrash class="me-2" />
@@ -98,7 +97,7 @@
             </table>
         </div>
     </div>
-    <ModalComponent id="delete-modal" />
+    <ModalComponent @hide-modal="showModal = false" v-show="showModal" id="delete-modal" />
 </template>
 
 <script setup>
@@ -119,6 +118,7 @@ import { onMounted, ref } from 'vue';
 
 // Data
 const contacts = ref(null);
+let showModal = ref(false);
 
 // Methods
 async function fetchData() {

@@ -46,6 +46,6 @@ npm run lint
 
 - [x] Create a fake json DB
 - [x] Add Axios (redaxios added actually!)
-- [ ] Fixing Flowbite modal
+- [x] Fixing Flowbite modal
 - [ ] Refactoring Compononets
 - [ ] Make a `useFetch.js` composable
