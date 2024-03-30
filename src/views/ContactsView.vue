@@ -97,7 +97,7 @@
             </table>
         </div>
     </div>
-    <ModalComponent @hide-modal="showModal = false" v-show="showModal" id="delete-modal" />
+    <ModalComponent :show="showModal" @hide-modal="showModal = false" />
 </template>
 
 <script setup>
