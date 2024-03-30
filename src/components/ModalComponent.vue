@@ -6,7 +6,6 @@
         leave-to-class="opacity-0">
         <div
             v-show="props.show"
-            @click="emit('hideModal')"
             class="fixed z-50 grid h-screen max-h-full w-screen place-items-center items-center justify-center overflow-y-auto overflow-x-hidden bg-gray-950 bg-opacity-50 md:inset-0">
             <transition
                 enter-from-class="opacity-0 scale-75"
@@ -15,25 +14,6 @@
                 leave-to-class="opacity-0 scale-75">
                 <div class="relative max-h-full w-full max-w-md p-4" v-show="props.show">
                     <div class="relative rounded-lg bg-white px-12 py-2 shadow dark:bg-gray-700">
-                        <button
-                            @click="emit('hideModal')"
-                            type="button"
-                            class="absolute end-2.5 top-3 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
-                            <svg
-                                class="h-3 w-3"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 14 14">
-                                <path
-                                    stroke="currentColor"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                            <span class="sr-only">إغلاق</span>
-                        </button>
                         <div class="p-4 text-center md:p-5">
                             <svg
                                 class="mx-auto mb-4 h-12 w-12 text-gray-400 dark:text-gray-200"
@@ -59,7 +39,7 @@
                             </button>
                             <button
                                 type="button"
-                                class="inline-flex items-center rounded-lg bg-red-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800">
+                                class="inline-flex items-center rounded-lg bg-red-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400 dark:focus:ring-red-400">
                                 تأكيد
                             </button>
                         </div>
