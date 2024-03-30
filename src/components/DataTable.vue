@@ -106,29 +106,27 @@ import EditPen from '../components/icons/EditPen.vue';
 import LogoInstagram from '../components/icons/LogoInstagram.vue';
 import LogoFacebook from '../components/icons/LogoFacebook.vue';
 
-// Libraries
-import axios from 'redaxios';
+// Stores
+import { useHttp } from '@/stores/useHttp';
 
 // Vue's
 import { onMounted, ref } from 'vue';
 
 // Data
 const contacts = ref(null);
+const request = useHttp();
 let showModal = ref(false);
 
-// Methods
-async function fetchData() {
+async function getContacts() {
     try {
-        const res = await axios('http://localhost:3000/contacts');
-        const data = res.data;
-        contacts.value = data;
+        contacts.value = await request.get('http://localhost:3000/contacts');
     } catch (error) {
-        console.error('Axios error: ' + error);
+        console.error('Error retrieving contacts:', error);
     }
 }
 
 // Lifecycle Hooks
 onMounted(() => {
-    fetchData();
+    getContacts();
 });
 </script>
