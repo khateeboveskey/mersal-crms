@@ -1,24 +1,6 @@
 {
     "contacts": [
         {
-            "name": "100",
-            "phoneNo": "776218541",
-            "email": "khateeboveskey@gmail.com",
-            "address": "المنصورة",
-            "interests": ["بحري", "حق مزوجين"],
-            "birthDate": "3/7/2003",
-            "id": "55"
-        },
-        {
-            "name": "102",
-            "phoneNo": "776218541",
-            "email": "khateeboveskey@gmail.com",
-            "address": "المنصورة",
-            "interests": ["بحري", "حق مزوجين"],
-            "birthDate": "3/7/2003",
-            "id": "57"
-        },
-        {
             "name": "103",
             "phoneNo": "776218541",
             "email": "khateeboveskey@gmail.com",

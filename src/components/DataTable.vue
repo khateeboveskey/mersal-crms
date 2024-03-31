@@ -1,11 +1,12 @@
 <template>
-    <div class="relative overflow-x-auto rounded-lg">
+    <div class="relative overflow-x-auto overflow-y-hidden rounded-lg">
         <table
+            v-if="contactsDataSource"
             class="w-full text-left text-sm text-gray-500 shadow-lg dark:text-gray-400 rtl:text-right">
             <thead
                 class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="p-4">
+                    <th scope="col" :class="{ 'rounded-s-lg': !contactsDataSource }" class="p-4">
                         <div class="flex items-center">
                             <input
                                 id="checkbox-all-search"
@@ -20,15 +21,20 @@
                     <th scope="col" class="px-6 py-3">تاريخ الميلاد</th>
                     <th scope="col" class="px-6 py-3">العنوان</th>
                     <th scope="col" class="px-6 py-3">الاهتمامات</th>
-                    <th scope="col" class="px-6 py-3">الإجراءات</th>
+                    <th
+                        scope="col"
+                        :class="{ 'rounded-e-lg': !contactsDataSource }"
+                        class="px-6 py-3">
+                        الإجراءات
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr
-                    v-for="contact in contacts"
+                    v-for="contact in contactsDataSource"
                     :key="contact.id"
                     v-show="contact.id !== hiddenContactId"
-                    class="border-b bg-white last:border-0 dark:border-gray-700 dark:bg-gray-800">
+                    class="border-b bg-white transition duration-300 last:border-0 dark:border-gray-700 dark:bg-gray-800">
                     <td class="w-4 p-4">
                         <div class="flex items-center">
                             <input
@@ -91,6 +97,9 @@
                 </tr>
             </tbody>
         </table>
+        <span v-else class="grid place-items-center p-5 text-gray-500">
+            عذراً، لم يتم العثور على نتائج
+        </span>
     </div>
     <ModalComponent
         :contactId="contactToDeleteId"
@@ -112,7 +121,7 @@ import LogoFacebook from '../components/icons/LogoFacebook.vue';
 import { useHttp } from '@/stores/useHttp';
 
 // Vue's
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 
 // Data
 const contacts = ref(null);
@@ -137,6 +146,33 @@ function deleteContact(contactId) {
 function hide(c) {
     hiddenContactId.value = c;
 }
+
+const props = defineProps({
+    searchValue: String
+});
+
+const searchResult = computed(() => {
+    if (!contacts.value) return []; // Guard against null value
+    return contacts.value.filter(
+        (c) =>
+            c.name.includes(props.searchValue) ||
+            c.phoneNo.includes(props.searchValue) ||
+            c.email.includes(props.searchValue) ||
+            c.address.includes(props.searchValue) ||
+            c.interests.join('، ').includes(props.searchValue) ||
+            c.birthDate.includes(props.searchValue)
+    );
+});
+
+let contactsDataSource = computed(() => {
+    if (searchResult.value.length > 0) {
+        return searchResult.value;
+    } else if (searchResult.value.length === 0 || props.searchValue === undefined) {
+        return;
+    } else {
+        return contacts.value;
+    }
+});
 
 // Lifecycle Hooks
 onMounted(() => {
