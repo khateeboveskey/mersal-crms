@@ -2,6 +2,10 @@ import { defineStore } from 'pinia';
 import axios from 'redaxios';
 
 export const useHttp = defineStore('http', {
+    state: () => ({
+        isLoading: false
+    }),
+
     actions: {
         async get(url) {
             try {
@@ -10,6 +14,8 @@ export const useHttp = defineStore('http', {
                 return data;
             } catch (error) {
                 console.error('Axios error: ' + error);
+            } finally {
+                this.isLoading = false; // Set isLoading to false after the request completes or fails
             }
         }
     }
