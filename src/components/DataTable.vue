@@ -97,8 +97,12 @@
                 </tr>
             </tbody>
         </table>
-        <span v-else class="grid place-items-center p-5 text-gray-500">
+        <!-- "!isResultFound" would accept null as true -->
+        <span v-else-if="isResultFound === false" class="grid place-items-center p-5 text-gray-500">
             عذراً، لم يتم العثور على نتائج
+        </span>
+        <span v-else class="grid animate-pulse place-items-center p-5 text-gray-500">
+            جاري التحميل...
         </span>
     </div>
     <ModalComponent
@@ -121,11 +125,14 @@ import LogoFacebook from '../components/icons/LogoFacebook.vue';
 import { useHttp } from '@/stores/useHttp';
 
 // Vue's
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref, computed, watch } from 'vue';
 
 // Data
 const contacts = ref(null);
+const isResultFound = ref(null);
+
 const request = useHttp();
+
 let showModal = ref(false);
 let hiddenContactId = ref();
 let contactToDeleteId = ref(null);
@@ -165,12 +172,20 @@ const searchResult = computed(() => {
 });
 
 let contactsDataSource = computed(() => {
-    if (searchResult.value.length > 0) {
+    if (isResultFound.value) {
         return searchResult.value;
-    } else if (searchResult.value.length === 0 || props.searchValue === undefined) {
+    } else if (searchResult.value.length === 0 && props.searchValue !== null) {
         return;
     } else {
         return contacts.value;
+    }
+});
+
+watch(searchResult, () => {
+    if (searchResult.value.length > 0) {
+        isResultFound.value = true;
+    } else if (searchResult.value.length === 0 && props.searchValue !== null) {
+        isResultFound.value = false;
     }
 });
 

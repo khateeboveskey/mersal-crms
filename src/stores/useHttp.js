@@ -10,6 +10,8 @@ export const useHttp = defineStore('http', {
                 return data;
             } catch (error) {
                 console.error('Axios error: ' + error);
+            } finally {
+                this.isLoading = false; // Set isLoading to false after the request completes or fails
             }
         }
     }
