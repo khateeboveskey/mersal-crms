@@ -25,9 +25,10 @@
             </thead>
             <tbody>
                 <tr
-                    v-for="(contact, index) in contacts"
+                    v-for="contact in contacts"
                     :key="contact.id"
-                    class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
+                    v-show="contact.id !== hiddenContactId"
+                    class="border-b bg-white last:border-0 dark:border-gray-700 dark:bg-gray-800">
                     <td class="w-4 p-4">
                         <div class="flex items-center">
                             <input
@@ -39,10 +40,7 @@
                     </td>
                     <th
                         scope="row"
-                        class="flex items-center whitespace-nowrap px-6 py-4 text-gray-900 dark:text-white">
-                        <img
-                            class="h-10 w-10 rounded-full"
-                            :src="`https://i.pravatar.cc/100?img=${index}`" />
+                        class="flex items-center whitespace-nowrap py-4 pe-6 text-gray-900 dark:text-white">
                         <div class="ps-3">
                             <div class="mb-1 text-base font-semibold">{{ contact.name }}</div>
                             <a target="_blank" :href="'mailto:' + contact.email">
@@ -82,7 +80,7 @@
                                 تعديل
                             </button>
                             <button
-                                @click="showModal = !showModal"
+                                @click="deleteContact(contact.id)"
                                 type="button"
                                 class="dark:text-red inline-flex items-center rounded-e-lg border border-s-0 border-red-500 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-500 hover:text-red-700 focus:z-10 focus:text-red-700 focus:ring-2 focus:ring-red-700 dark:border-gray-700 dark:hover:bg-red-950 dark:hover:text-red-500 dark:focus:text-red-500 dark:focus:ring-red-500">
                                 <DeleteTrash class="me-2 h-5 w-5 text-red-500" />
@@ -94,7 +92,11 @@
             </tbody>
         </table>
     </div>
-    <ModalComponent :show="showModal" @hide-modal="showModal = false" />
+    <ModalComponent
+        :contactId="contactToDeleteId"
+        :show="showModal"
+        @hide-modal="showModal = false"
+        @hide-from-list="hide" />
 </template>
 
 <script setup>
@@ -116,6 +118,8 @@ import { onMounted, ref } from 'vue';
 const contacts = ref(null);
 const request = useHttp();
 let showModal = ref(false);
+let hiddenContactId = ref();
+let contactToDeleteId = ref(null);
 
 async function getContacts() {
     try {
@@ -123,6 +127,15 @@ async function getContacts() {
     } catch (error) {
         console.error('Error retrieving contacts:', error);
     }
+}
+
+function deleteContact(contactId) {
+    showModal.value = true;
+    contactToDeleteId.value = contactId;
+}
+
+function hide(c) {
+    hiddenContactId.value = c;
 }
 
 // Lifecycle Hooks
