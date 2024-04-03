@@ -2,19 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Hiding vue devtools floating panel */
-#vue-inspector-container,
-#__vue-devtools-container__ {
-    display: none;
-}
+@layer base {
+    @font-face {
+        font-family: 'RB';
+        src: url('./fonts/RB.woff2') format('woff2');
+    }
 
-@font-face {
-    font-family: 'RB';
-    src: url('./fonts/RB.woff2') format('woff2');
-}
+    * {
+        font-family: 'RB', Arial, sans-serif;
+    }
 
-* {
-    font-family: 'RB', Arial, sans-serif;
+    /* Hiding arrows from number input */
+    input[type="number"] {
+        @apply [&::-webkit-inner-spin-button]:appearance-none;
+    }
 }
 
 @layer utilities {
@@ -29,5 +30,11 @@
         /* IE and Edge */
         scrollbar-width: none;
         /* Firefox */
+    }
+}
+
+@layer components {
+    .required {
+        @apply after:ml-0.5 after:text-red-500 after:content-['*'] dark:after:text-red-500;
     }
 }
