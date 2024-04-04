@@ -60,10 +60,10 @@
                     <td class="px-6 py-4">
                         <div class="flex items-center">
                             <a target="_blank" class="rounded-lg p-2 hover:bg-gray-700" href="">
-                                <LogoInstagram />
+                                <LogoInstagram class="h-5 text-gray-500" />
                             </a>
                             <a target="_blank" class="rounded-lg p-2 hover:bg-gray-700" href="">
-                                <LogoFacebook />
+                                <LogoFacebook class="h-5 text-gray-500" />
                             </a>
                         </div>
                     </td>
@@ -163,7 +163,7 @@ const searchResult = computed(() => {
     return contacts.value.filter(
         (c) =>
             c.name.includes(props.searchValue) ||
-            c.phoneNo.includes(props.searchValue) ||
+            c.phoneNo.toString().includes(props.searchValue) ||
             c.email.includes(props.searchValue) ||
             c.address.includes(props.searchValue) ||
             c.interests.join('، ').includes(props.searchValue) ||
