@@ -146,24 +146,30 @@ const socialMediaIcons = [
     ref(markRaw(InternetEarth))
 ];
 
-// Function to extract the social media name from the link using regex
-function extractSocialMediaName(link) {
-    if (link) {
+/**
+ * Extracts only the website name from a url
+ * @example "Twitter" from "https://twitter.com/example"
+ * @param {string} url the link to extract the name from
+ * @returns Website name
+ */
+function extractWebsiteName(url) {
+    if (url) {
         const regex = /(?:https?:\/\/)?(?:www\.)?(?:m\.)?(?:([^./]+)\.)?([^./]+\.com)/;
-        const matches = link.match(regex);
+        const matches = url.match(regex);
         const [, subdomain, domain] = matches;
-        const socialMediaName = subdomain
+        let socialMediaName = subdomain
             ? subdomain.charAt(0).toUpperCase() + subdomain.slice(1)
             : domain.charAt(0).toUpperCase() + domain.slice(1);
-        return socialMediaName.replace(/\.[^/.]+$/, ''); // Remove the top-level domain
+        socialMediaName = socialMediaName.replace(/\.[^/.]+$/, '');
+        return socialMediaName; // Remove the top-level domain
     } else {
-        return;
+        return '';
     }
 }
 
 function changeSocialMediaIcon(event, index) {
     // Extract the social media name from the input URL
-    const socialMediaName = extractSocialMediaName(event.target.value);
+    const socialMediaName = extractWebsiteName(event.target.value);
     switch (socialMediaName) {
         case 'Instagram':
             socialMediaIcons[index].value = markRaw(LogoInstagram);
