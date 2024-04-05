@@ -9,17 +9,26 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: HomeView
+            component: HomeView,
+            meta: {
+                title: `${import.meta.env.VITE_APP_TITLE} - الرئيسية`
+            }
         },
         {
             path: '/contacts',
             name: 'contacts',
-            component: ContactsView
+            component: ContactsView,
+            meta: {
+                title: `${import.meta.env.VITE_APP_TITLE} - جهات الاتصال`
+            }
         },
         {
             path: '/deals',
             name: 'deals',
-            component: DealsView
+            component: DealsView,
+            meta: {
+                title: `${import.meta.env.VITE_APP_TITLE} - العروض`
+            }
         }
     ]
 });
