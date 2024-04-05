@@ -1,7 +1,7 @@
 <template>
     <div class="my-5 md:mt-8">
         <span class="hidden text-slate-700 md:block">{{ props.title }}</span>
-        <div class="flex justify-between gap-3 md:flex-col">
+        <div class="flex justify-around gap-3 md:flex-col md:justify-between">
             <slot></slot>
         </div>
     </div>

@@ -6,15 +6,6 @@
             <thead
                 class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" :class="{ 'rounded-s-lg': !contactsDataSource }" class="p-4">
-                        <div class="flex items-center">
-                            <input
-                                id="checkbox-all-search"
-                                type="checkbox"
-                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600 dark:focus:ring-offset-gray-800" />
-                            <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                        </div>
-                    </th>
                     <th scope="col" class="px-6 py-3">الاسم</th>
                     <th scope="col" class="px-6 py-3">الرقم</th>
                     <th scope="col" class="px-6 py-3">حسابات مواقع التواصل</th>
@@ -35,18 +26,9 @@
                     :key="contact.id"
                     v-show="contact.id !== hiddenContactId"
                     class="border-b bg-white transition duration-300 last:border-0 dark:border-gray-700 dark:bg-gray-800">
-                    <td class="w-4 p-4">
-                        <div class="flex items-center">
-                            <input
-                                id="checkbox-table-search-1"
-                                type="checkbox"
-                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600 dark:focus:ring-offset-gray-800" />
-                            <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                        </div>
-                    </td>
-                    <th
+                    <td
                         scope="row"
-                        class="flex items-center whitespace-nowrap py-4 pe-6 text-gray-900 dark:text-white">
+                        class="flex items-center whitespace-nowrap py-4 pe-6 ps-3 text-gray-900 dark:text-white">
                         <div class="ps-3">
                             <div class="mb-1 text-base font-semibold">{{ contact.name }}</div>
                             <a target="_blank" :href="'mailto:' + contact.email">
@@ -55,15 +37,19 @@
                                 </div>
                             </a>
                         </div>
-                    </th>
+                    </td>
                     <td class="px-6 py-4">{{ contact.phoneNo }}</td>
                     <td class="px-6 py-4">
                         <div class="flex items-center">
-                            <a target="_blank" class="rounded-lg p-2 hover:bg-gray-700" href="">
-                                <LogoInstagram class="h-5 text-gray-500" />
-                            </a>
-                            <a target="_blank" class="rounded-lg p-2 hover:bg-gray-700" href="">
-                                <LogoFacebook class="h-5 text-gray-500" />
+                            <a
+                                v-for="socialMediaLink in contact.socialMediaLinks"
+                                :key="socialMediaLink"
+                                target="_blank"
+                                class="rounded-lg p-2 hover:bg-gray-700"
+                                :href="socialMediaLink">
+                                <component
+                                    class="h-5 w-5"
+                                    :is="changeSocialMediaIcon(socialMediaLink)"></component>
                             </a>
                         </div>
                     </td>
@@ -118,11 +104,14 @@ import ModalComponent from '../components/ModalComponent.vue';
 // Icons
 import DeleteTrash from '../components/icons/DeleteTrash.vue';
 import EditPen from '../components/icons/EditPen.vue';
-import LogoInstagram from '../components/icons/LogoInstagram.vue';
-import LogoFacebook from '../components/icons/LogoFacebook.vue';
 
 // Stores
 import { useHttp } from '@/stores/useHttp';
+import { useUrl } from '@/stores/useUrl';
+import { useIcon } from '@/stores/useIcon';
+
+const urlRegex = useUrl();
+const icon = useIcon();
 
 // Vue's
 import { onMounted, ref, computed, watch } from 'vue';
@@ -188,6 +177,11 @@ watch(searchResult, () => {
         isResultFound.value = false;
     }
 });
+
+function changeSocialMediaIcon(socialMediaLink) {
+    const socialMediaName = urlRegex.extractWebsiteName(socialMediaLink);
+    return icon.getSocialMediaIconComponent(socialMediaName);
+}
 
 // Lifecycle Hooks
 onMounted(() => {

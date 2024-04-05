@@ -1,16 +1,3 @@
 {
-  "contacts": [
-    {
-      "id": "22b7",
-      "name": "عبدالرحمن الخطيب",
-      "phoneNo": 773478347,
-      "email": "khateeboveskey@gmail.com",
-      "address": "عدن",
-      "interests": [
-        "سوق عدن",
-        "أملاح"
-      ],
-      "birthDate": "2003-03-07"
-    }
-  ]
+  "contacts": []
 }

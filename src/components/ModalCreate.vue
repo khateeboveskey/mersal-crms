@@ -14,7 +14,19 @@
                 leave-to-class="opacity-0 scale-75">
                 <form @submit="sendData" v-show="props.showCreateModal">
                     <div
-                        class="relative mx-4 mb-4 grid max-h-full w-screen max-w-md gap-4 rounded-lg bg-white p-10 shadow dark:bg-gray-700 sm:grid-cols-2 md:w-full">
+                        class="relative grid max-h-full w-screen max-w-md gap-4 rounded-lg bg-white p-10 shadow dark:bg-gray-700 sm:grid-cols-2 md:w-full">
+                        <div
+                            class="flex items-center justify-between border-b pb-3 dark:border-gray-600 sm:col-span-2">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                إضافة جهة اتصال جديدة
+                            </h3>
+                            <button
+                                type="button"
+                                class="ms-auto inline-flex items-center justify-center rounded-lg bg-transparent p-1 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
+                                <RemoveX class="h-6" />
+                                <span class="sr-only">إغلاق</span>
+                            </button>
+                        </div>
                         <!-- Modal Body -->
                         <div class="mb-2 block text-sm font-medium text-gray-400 sm:col-span-2">
                             تشير علامة الـ
@@ -94,6 +106,7 @@
                                         class="h-6 w-6 text-gray-400"
                                         :is="socialMediaIcons[index].value"></component>
                                     <input
+                                        v-model="data.socialMediaLinks[index]"
                                         @input="changeSocialMediaIcon($event, index)"
                                         type="text"
                                         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500" />
@@ -119,7 +132,7 @@
                                         <button
                                             @click.prevent="deleteInterest($event, interest)"
                                             class="mx-1">
-                                            x
+                                            <RemoveX class="h-3 w-3" />
                                         </button>
                                         {{ interest }}
                                     </span>
@@ -153,9 +166,11 @@ import { onMounted, ref, markRaw, reactive } from 'vue';
 
 import { useUrl } from '@/stores/useUrl';
 import { useHttp } from '@/stores/useHttp';
+import { useIcon } from '@/stores/useIcon';
 
 const urlRegex = useUrl();
 const request = useHttp();
+const icon = useIcon();
 
 const props = defineProps({
     showCreateModal: Boolean
@@ -165,14 +180,10 @@ onMounted(() => {
     initFlowbite();
 });
 
-import InternetEarth from './icons/InternetEarth.vue';
-import LogoInstagram from './icons/LogoInstagram.vue';
-import LogoFacebook from './icons/LogoFacebook.vue';
-import LogoGithub from './icons/LogoGithub.vue';
-import LogoTwitter from './icons/LogoTwitter.vue';
-import LogoTelegram from './icons/LogoTelegram.vue';
-import LogoSnapchat from './icons/LogoSnapchat.vue';
 import CreatePlus from './icons/CreatePlus.vue';
+import RemoveX from './icons/RemoveX.vue';
+
+import InternetEarth from './icons/InternetEarth.vue';
 
 const socialMediaIcons = [
     ref(markRaw(InternetEarth)),
@@ -181,30 +192,8 @@ const socialMediaIcons = [
 ];
 
 function changeSocialMediaIcon(event, index) {
-    // Extract the social media name from the input URLasd
     const socialMediaName = urlRegex.extractWebsiteName(event.target.value);
-    switch (socialMediaName) {
-        case 'Instagram':
-            socialMediaIcons[index].value = markRaw(LogoInstagram);
-            break;
-        case 'Facebook':
-            socialMediaIcons[index].value = markRaw(LogoFacebook);
-            break;
-        case 'Github':
-            socialMediaIcons[index].value = markRaw(LogoGithub);
-            break;
-        case 'Twitter':
-            socialMediaIcons[index].value = markRaw(LogoTwitter);
-            break;
-        case 'Telegram':
-            socialMediaIcons[index].value = markRaw(LogoTelegram);
-            break;
-        case 'Snapchat':
-            socialMediaIcons[index].value = markRaw(LogoSnapchat);
-            break;
-        default:
-            socialMediaIcons[index].value = markRaw(InternetEarth);
-    }
+    socialMediaIcons[index].value = icon.getSocialMediaIconComponent(socialMediaName);
 }
 
 const newInterest = ref('');
@@ -225,6 +214,7 @@ const data = reactive({
     phoneNo: '',
     email: '',
     address: '',
+    socialMediaLinks: ['', '', ''],
     interests: [],
     birthDate: ''
 });

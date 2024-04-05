@@ -10,11 +10,11 @@
 </template>
 
 <script setup>
-import { useIconsSettingStore } from '@/stores/useIconsSettingStore';
+import { useIcon } from '@/stores/useIcon';
 
 let props = defineProps({
     title: String
 });
 
-const setting = useIconsSettingStore();
+const setting = useIcon();
 </script>
