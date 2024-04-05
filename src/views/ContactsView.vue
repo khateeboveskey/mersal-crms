@@ -20,7 +20,10 @@
             </button>
         </section>
         <DataTable :search-value="searchValue" />
-        <ModalCreate :show-create-modal="showCreateModal" />
+        <ModalCreate
+            @hide-modal="showCreateModal = false"
+            v-show="showCreateModal"
+            :show-create-modal="showCreateModal" />
     </div>
 </template>
 

@@ -1,3 +1,24 @@
 {
-  "contacts": []
+  "contacts": [
+    {
+      "id": "ec8e",
+      "name": "عبدالرحمن الخطيب",
+      "phoneNo": 776218541,
+      "email": "khateeboveskey@gmail.com",
+      "address": "عدن - المنصورة",
+      "socialMediaLinks": [
+        "instagram.com/khateeb404",
+        "youtube.com/@khateebedia",
+        ""
+      ],
+      "interests": [
+        "بحري",
+        "كرسبيات",
+        "زنجر",
+        "عيد الأم",
+        "عيد الحب"
+      ],
+      "birthDate": "2003-07-03"
+    }
+  ]
 }

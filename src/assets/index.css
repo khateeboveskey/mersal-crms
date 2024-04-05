@@ -10,11 +10,21 @@
 
     * {
         font-family: 'RB', Arial, sans-serif;
+        @apply [&::-webkit-scrollbar]:w-[5px];
+        @apply [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-900;
+        @apply [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-primary-500;
     }
 
     /* Hiding arrows from number input */
     input[type="number"] {
         @apply [&::-webkit-inner-spin-button]:appearance-none;
+    }
+
+    /* todo: make this dynamic */
+    @supports not selector(::-webkit-scrollbar) {
+        * {
+            scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+        }
     }
 }
 
