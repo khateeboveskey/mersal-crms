@@ -106,7 +106,6 @@ import DeleteTrash from '../components/icons/DeleteTrash.vue';
 import EditPen from '../components/icons/EditPen.vue';
 
 // Stores
-import { useHttp } from '@/stores/useHttp';
 import { useUrl } from '@/stores/useUrl';
 import { useIcon } from '@/stores/useIcon';
 
@@ -115,12 +114,11 @@ const icon = useIcon();
 
 // Vue's
 import { onMounted, ref, computed, watch } from 'vue';
+import axios from 'redaxios';
 
 // Data
 const contacts = ref(null);
 const isResultFound = ref(null);
-
-const request = useHttp();
 
 let showModal = ref(false);
 let hiddenContactId = ref();
@@ -128,7 +126,8 @@ let contactToDeleteId = ref(null);
 
 async function getContacts() {
     try {
-        contacts.value = await request.get('http://localhost:3000/contacts');
+        const res = await axios.get('http://localhost:3000/contacts');
+        contacts.value = res.data;
     } catch (error) {
         console.error('Error retrieving contacts:', error);
     }
@@ -151,12 +150,12 @@ const searchResult = computed(() => {
     if (!contacts.value) return []; // Guard against null value
     return contacts.value.filter(
         (c) =>
-            c.name.includes(props.searchValue) ||
-            c.phoneNo.toString().includes(props.searchValue) ||
-            c.email.includes(props.searchValue) ||
-            c.address.includes(props.searchValue) ||
-            c.interests.join('، ').includes(props.searchValue) ||
-            c.birthDate.includes(props.searchValue)
+            (c.name && c.name.includes(props.searchValue)) ||
+            (c.phoneNo && c.phoneNo.toString().includes(props.searchValue)) ||
+            (c.email && c.email.includes(props.searchValue)) ||
+            (c.address && c.address.includes(props.searchValue)) ||
+            (c.interests && c.interests.join('، ').includes(props.searchValue)) ||
+            (c.birthDate && c.birthDate.includes(props.searchValue))
     );
 });
 

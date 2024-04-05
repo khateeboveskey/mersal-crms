@@ -20,15 +20,19 @@
             </button>
         </section>
         <DataTable :search-value="searchValue" />
-        <ModalCreate
+        <ModalContainer
+            title="إضافة جهة اتصال جديدة"
             @hide-modal="showCreateModal = false"
             v-show="showCreateModal"
-            :show-create-modal="showCreateModal" />
+            :show="showCreateModal">
+            <CreateForm />
+        </ModalContainer>
     </div>
 </template>
 
 <script setup>
-import ModalCreate from '../components/ModalCreate.vue';
+import ModalContainer from '../components/ModalContainer.vue';
+import CreateForm from '../components/CreateForm.vue';
 import CreatePlus from '../components/icons/CreatePlus.vue';
 
 import { ref } from 'vue';

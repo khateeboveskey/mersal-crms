@@ -10,7 +10,7 @@
 
     * {
         font-family: 'RB', Arial, sans-serif;
-        @apply [&::-webkit-scrollbar]:w-[5px];
+        @apply [&::-webkit-scrollbar]:w-[5px] [&::-webkit-scrollbar]:h-[5px];
         @apply [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-900;
         @apply [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-primary-500;
     }
