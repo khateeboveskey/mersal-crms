@@ -143,7 +143,7 @@ function hide(c) {
 }
 
 const props = defineProps({
-    searchValue: String
+    searchValue: String,
 });
 
 const searchResult = computed(() => {
@@ -155,7 +155,7 @@ const searchResult = computed(() => {
             (c.email && c.email.includes(props.searchValue)) ||
             (c.address && c.address.includes(props.searchValue)) ||
             (c.interests && c.interests.join('، ').includes(props.searchValue)) ||
-            (c.birthDate && c.birthDate.includes(props.searchValue))
+            (c.birthDate && c.birthDate.includes(props.searchValue)),
     );
 });
 

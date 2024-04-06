@@ -26,17 +26,17 @@ export const useIcon = defineStore('icon', {
          */
         getSocialMediaIconComponent(websiteName) {
             switch (websiteName) {
-                case 'Instagram':
+                case 'instagram':
                     return markRaw(LogoInstagram);
-                case 'Facebook':
+                case 'facebook':
                     return markRaw(LogoFacebook);
-                case 'Github':
+                case 'github':
                     return markRaw(LogoGithub);
-                case 'Twitter':
+                case 'twitter':
                     return markRaw(LogoTwitter);
-                case 'Telegram':
+                case 'telegram':
                     return markRaw(LogoTelegram);
-                case 'Snapchat':
+                case 'snapchat':
                     return markRaw(LogoSnapchat);
                 default:
                     return markRaw(InternetEarth);

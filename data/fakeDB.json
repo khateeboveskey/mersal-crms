@@ -1,53 +1,15 @@
 {
   "contacts": [
     {
-      "id": "ec8e",
+      "id": "1108",
       "name": "عبدالرحمن الخطيب",
-      "phoneNo": 776218541,
+      "phoneNo": 773478347,
       "email": "khateeboveskey@gmail.com",
       "address": "عدن - المنصورة",
       "socialMediaLinks": [
-        "instagram.com/khateeb404",
-        "youtube.com/@khateebedia",
-        ""
-      ],
-      "interests": [
-        "بحري",
-        "كرسبيات",
-        "زنجر",
-        "عيد الأم",
-        "عيد الحب"
+        "instagram.com/khateeb404"
       ],
       "birthDate": "2003-07-03"
-    },
-    {
-      "id": "e23e",
-      "name": "فلان",
-      "phoneNo": 787987,
-      "email": "pholane@gmail.com",
-      "address": "",
-      "socialMediaLinks": [
-        "",
-        "",
-        ""
-      ],
-      "interests": [],
-      "birthDate": ""
-    },
-    {
-      "id": "56d2",
-      "name": "عبدالرحمن الخطيبببب",
-      "phoneNo": 987987987987,
-      "email": "khateeboveskey@gmail.com"
-    },
-    {
-      "id": "5ded",
-      "name": "حسين علي",
-      "phoneNo": 9898798798798798,
-      "email": "hussainali@gmail.com",
-      "socialMediaLinks": [
-        "facebook.com/asd"
-      ]
     }
   ]
 }

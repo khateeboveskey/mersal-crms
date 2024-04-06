@@ -1,26 +1,31 @@
 import { defineStore } from 'pinia';
 
 export const useUrl = defineStore('url', {
+    state: () => {
+        return {
+            urlRegEx: /(?:https?:\/\/)?(?:www\.)?(?:m\.)?(?:([^./]+)\.)?([^./]+\.com)/,
+        };
+    },
     actions: {
         /**
-         * Extracts only the website name from a url
-         * @example "Twitter" from "https://twitter.com/example"
-         * @param {string} url the link to extract the name from
-         * @returns Website name
+         * Extracts the website name from a given URL.
+         *
+         * @param {string} url - The URL to extract the website name from.
+         * @returns {string} The website name extracted from the URL, or an empty string if the extraction fails.
          */
         extractWebsiteName(url) {
-            if (url) {
-                const regex = /(?:https?:\/\/)?(?:www\.)?(?:m\.)?(?:([^./]+)\.)?([^./]+\.com)/;
-                const matches = url.match(regex);
+            const regex = this.urlRegEx;
+            const matches = url.match(regex);
+            if (url && regex && matches) {
                 const [, subdomain, domain] = matches;
                 let socialMediaName = subdomain
-                    ? subdomain.charAt(0).toUpperCase() + subdomain.slice(1)
-                    : domain.charAt(0).toUpperCase() + domain.slice(1);
+                    ? subdomain.charAt(0) + subdomain.slice(1)
+                    : domain.charAt(0) + domain.slice(1);
                 socialMediaName = socialMediaName.replace(/\.[^/.]+$/, '');
-                return socialMediaName; // Remove the top-level domain
+                return socialMediaName;
             } else {
                 return '';
             }
-        }
-    }
+        },
+    },
 });

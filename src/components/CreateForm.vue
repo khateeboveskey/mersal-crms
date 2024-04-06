@@ -77,8 +77,8 @@
                             class="h-6 w-6 text-gray-400"
                             :is="socialMediaIcons[index].value"></component>
                         <input
-                            v-model="data.socialMediaLinks[index]"
-                            @input="changeSocialMediaIcon($event, index)"
+                            v-model="socialMediaLinks[index]"
+                            @input="changeSocialMediaIcon($event, index), updateObject()"
                             type="text"
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500" />
                     </span>
@@ -149,7 +149,7 @@ import InternetEarth from './icons/InternetEarth.vue';
 const socialMediaIcons = [
     ref(markRaw(InternetEarth)),
     ref(markRaw(InternetEarth)),
-    ref(markRaw(InternetEarth))
+    ref(markRaw(InternetEarth)),
 ];
 
 function changeSocialMediaIcon(event, index) {
@@ -157,11 +157,25 @@ function changeSocialMediaIcon(event, index) {
     socialMediaIcons[index].value = icon.getSocialMediaIconComponent(socialMediaName);
 }
 
+const socialMediaLinks = reactive([]);
+
+function updateObject() {
+    data.socialMediaLinks = {};
+    socialMediaLinks.forEach((url) => {
+        if (url !== '') {
+            if (urlRegex.extractWebsiteName(url) === '') {
+                data.socialMediaLinks[url] = url;
+            } else {
+                data.socialMediaLinks[urlRegex.extractWebsiteName(url)] = url;
+            }
+        }
+    });
+}
+
 const newInterest = ref('');
 
 function addInterest() {
     if (newInterest.value === '') return;
-    console.log('ADD');
     data.interests.push(newInterest.value);
     newInterest.value = '';
 }
@@ -175,9 +189,9 @@ const data = reactive({
     phoneNo: '',
     email: '',
     address: '',
-    socialMediaLinks: [],
+    socialMediaLinks: {},
     interests: [],
-    birthDate: ''
+    birthDate: '',
 });
 
 function getOnlyFilled(obj) {
@@ -207,7 +221,10 @@ function removeLastItem() {
 
 async function sendData() {
     try {
-        const res = await axios.post('http://localhost:3000/contacts', getOnlyFilled(data));
+        const res = await axios.post(
+            'http://localhost:3000/contacts',
+            JSON.stringify(getOnlyFilled(data)),
+        );
         console.log(res);
     } catch (error) {
         console.log(error);
