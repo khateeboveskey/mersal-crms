@@ -1,6 +1,6 @@
 <template>
     <form @submit="sendData">
-        <div class="relative grid max-h-full w-screen max-w-md gap-4 sm:grid-cols-2 md:w-full">
+        <div class="relative grid max-h-full max-w-md gap-4 sm:grid-cols-2 md:w-full">
             <div class="mb-2 block text-sm font-medium text-gray-400 sm:col-span-2">
                 تشير علامة الـ
                 <span class="required"></span>
@@ -33,7 +33,7 @@
                     tabindex="0"
                     @focus.self="focusOnChildInput"
                     @click.self="focusOnChildInput"
-                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pb-2 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500">
+                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pb-2 text-sm text-gray-900 hover:cursor-text focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500">
                     <div class="flex flex-wrap items-center">
                         <span
                             v-for="interest in data.interests"
@@ -52,14 +52,14 @@
                             @keyup.enter="addInterest" />
                     </div>
                 </div>
-                <div class="mt-5 flex items-center justify-end sm:col-span-2">
-                    <button
-                        type="submit"
-                        class="flex flex-row items-center gap-1 rounded-lg bg-primary-700 px-5 py-2.5 ps-4 text-center text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                        <CreatePlus class="h-5 w-5 text-white" />
-                        <span>إضافة</span>
-                    </button>
-                </div>
+            </div>
+            <div class="mt-5 flex items-center justify-end sm:col-span-2">
+                <button
+                    type="submit"
+                    class="flex flex-row items-center gap-1 rounded-lg bg-primary-700 px-5 py-2.5 ps-4 text-center text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    <CreatePlus class="h-5 w-5 text-white" />
+                    <span>إضافة</span>
+                </button>
             </div>
         </div>
     </form>
