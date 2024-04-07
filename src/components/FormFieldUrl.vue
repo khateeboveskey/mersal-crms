@@ -7,7 +7,7 @@
                 dir="ltr"
                 class="flex flex-row items-center gap-2">
                 <component
-                    class="h-6 w-6 text-gray-400"
+                    class="h-6 w-6 text-gray-400 dark:text-gray-400"
                     :is="socialMediaIcons[index].value"></component>
                 <input
                     :id="props.id"

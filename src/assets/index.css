@@ -11,8 +11,8 @@
     * {
         font-family: 'RB', Arial, sans-serif;
         @apply [&::-webkit-scrollbar]:h-[5px] [&::-webkit-scrollbar]:w-[5px];
-        @apply [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-900;
-        @apply [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-primary-500;
+        @apply [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-slate-100 dark:[&::-webkit-scrollbar-track]:bg-slate-900;
+        @apply [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-300 dark:[&::-webkit-scrollbar-thumb]:bg-slate-700;
     }
 
     /* Hiding arrows from number input */

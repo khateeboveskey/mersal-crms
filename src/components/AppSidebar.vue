@@ -1,6 +1,6 @@
 <template>
     <nav
-        class="fixed bottom-0 z-10 flex h-fit w-screen flex-row justify-between rounded-t-xl bg-slate-900 px-4 md:static md:right-0 md:h-screen md:w-fit md:flex-col md:rounded-none md:rounded-e-xl">
+        class="fixed bottom-0 z-10 flex h-fit w-screen flex-row justify-between rounded-t-xl bg-slate-100 px-4 dark:bg-slate-900 md:static md:right-0 md:h-screen md:w-fit md:flex-col md:rounded-none md:rounded-e-xl">
         <section class="w-full justify-between align-middle">
             <BrandIdentity>
                 <template #logo>
@@ -13,8 +13,8 @@
                     v-for="tab in tabs"
                     :key="tab.route"
                     :to="tab.route"
-                    :class="routerLinkClasses"
-                    :active-class="routerLinkActiveClasses">
+                    class="rounded-lg text-slate-600 hover:bg-slate-300 dark:hover:bg-slate-800"
+                    active-class="active-router text-white shadow-lg shadow-primary-300 dark:shadow-primary-300 dark:shadow-primary-900 bg-primary-700 z-10">
                     <TabItem :title="tab.title">
                         <component :is="tab.icon"></component>
                     </TabItem>
@@ -24,7 +24,7 @@
         <section class="hidden md:block">
             <AppSidebarLinks>
                 <a
-                    class="rounded-lg bg-transparent p-4 text-slate-500 hover:bg-slate-800"
+                    class="rounded-lg bg-transparent p-3 text-slate-400 hover:bg-slate-200 dark:text-slate-500 dark:hover:bg-slate-800"
                     href="https://github.com/khateeboveskey/mersal-crms"
                     target="_blank">
                     <LogoGithub class="w-7" />
@@ -68,13 +68,10 @@ const tabs = [
         icon: IconTag,
     },
 ];
-const routerLinkClasses = 'hover:bg-slate-800 rounded-lg text-slate-600';
-const routerLinkActiveClasses =
-    'active-router-link hover:bg-primary-700 bg-primary-700 text-white shadow-lg shadow-primary-900';
 </script>
 
-<style>
-.active-router-link:hover {
-    @apply bg-primary-700;
+<style scoped>
+.active-router:hover {
+    @apply bg-primary-700 dark:bg-primary-700;
 }
 </style>

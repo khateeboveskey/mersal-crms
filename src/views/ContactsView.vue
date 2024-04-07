@@ -14,7 +14,7 @@
             </div>
             <button
                 @click="showCreateModal = true"
-                class="flex flex-row items-center gap-1 rounded-lg bg-primary-700 px-4 text-white transition duration-300 hover:shadow-lg hover:shadow-primary-900">
+                class="flex flex-row items-center gap-1 rounded-lg bg-primary-700 px-4 text-white transition duration-200 hover:bg-primary-800">
                 <CreatePlus class="h-6 w-6 text-white" />
                 <span class="hidden md:block">إضافة جهة اتصال</span>
             </button>

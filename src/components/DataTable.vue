@@ -4,7 +4,7 @@
             v-if="contactsDataSource"
             class="w-full text-left text-sm text-gray-500 shadow-lg dark:text-gray-400 rtl:text-right">
             <thead
-                class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+                class="bg-gray-100 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">الاسم</th>
                     <th scope="col" class="px-6 py-3">الرقم</th>
@@ -45,7 +45,7 @@
                                 v-for="socialMediaLink in contact.socialMediaLinks"
                                 :key="socialMediaLink"
                                 target="_blank"
-                                class="rounded-lg p-2 hover:bg-gray-700"
+                                class="rounded-lg p-2 text-slate-400 hover:bg-gray-100 dark:text-slate-500 dark:hover:bg-gray-700"
                                 :href="socialMediaLink">
                                 <component
                                     class="h-5 w-5"
@@ -67,14 +67,14 @@
                         <div class="inline-flex rounded-md shadow-sm" role="group">
                             <button
                                 type="button"
-                                class="inline-flex items-center rounded-s-lg border border-gray-200 px-4 py-2 text-sm font-medium text-primary-500 focus:z-10 focus:text-primary-500 focus:ring-2 focus:ring-primary-500 dark:border-gray-700 dark:hover:bg-primary-950 dark:focus:ring-primary-500">
+                                class="inline-flex items-center rounded-s-lg border border-gray-200 px-4 py-2 text-sm font-medium text-primary-500 hover:bg-primary-100 focus:z-10 focus:text-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-700 dark:hover:bg-primary-950 dark:focus:ring-primary-500">
                                 <IconPenEdit class="me-2 h-5 w-5 text-primary-500" />
                                 تعديل
                             </button>
                             <button
                                 @click="deleteContact(contact.id)"
                                 type="button"
-                                class="dark:text-red inline-flex items-center rounded-e-lg border border-s-0 border-red-500 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-500 hover:text-red-700 focus:z-10 focus:text-red-700 focus:ring-2 focus:ring-red-700 dark:border-gray-700 dark:hover:bg-red-950 dark:hover:text-red-500 dark:focus:text-red-500 dark:focus:ring-red-500">
+                                class="inline-flex items-center rounded-e-lg border border-s-0 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-red-500 dark:border-gray-700 dark:text-red-500 dark:hover:bg-red-950 dark:hover:text-red-500 dark:focus:text-red-500">
                                 <IconDeleteTrash class="me-2 h-5 w-5 text-red-500" />
                                 حذف
                             </button>

@@ -7,7 +7,7 @@
         <div class="flex w-full flex-wrap items-center">
             <span
                 v-for="interest in interests"
-                class="mb-1 me-1 inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                class="mb-1 me-1 inline-flex items-center rounded-full bg-gray-200 px-2 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-900 dark:text-gray-300"
                 :key="interest">
                 <button @click.prevent="deleteInterest($event, interest)" class="mx-1">
                     <RemoveX class="h-3 w-3" />
