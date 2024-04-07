@@ -1,6 +1,6 @@
 <template>
     <form @submit="sendData">
-        <div class="relative grid max-h-full max-w-md gap-4 sm:grid-cols-2 md:w-full">
+        <div class="relative grid max-h-full w-full max-w-md gap-4 sm:w-[28rem] sm:grid-cols-2">
             <div class="mb-2 block text-sm font-medium text-gray-400 sm:col-span-2">
                 تشير علامة الـ
                 <span class="required"></span>
@@ -20,39 +20,13 @@
             <FormField
                 class="sm:col-span-2"
                 label="روابط حسابات وسائل التواصل"
-                v-model="data.address"
                 type="FormFieldUrl"
                 @send-data-to-grand-parent="updateDataSocialMedia" />
-            <div class="sm:col-span-2">
-                <label
-                    for="description"
-                    class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                    الاهتمامات
-                </label>
-                <div
-                    tabindex="0"
-                    @focus.self="focusOnChildInput"
-                    @click.self="focusOnChildInput"
-                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pb-2 text-sm text-gray-900 hover:cursor-text focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500">
-                    <div class="flex flex-wrap items-center">
-                        <span
-                            v-for="interest in data.interests"
-                            class="mb-1 me-1 inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-900 dark:text-gray-300"
-                            :key="interest">
-                            <button @click.prevent="deleteInterest($event, interest)" class="mx-1">
-                                <RemoveX class="h-3 w-3" />
-                            </button>
-                            {{ interest }}
-                        </span>
-                        <input
-                            class="inline w-auto bg-transparent text-sm text-gray-900 focus:outline-none dark:text-white dark:placeholder-gray-400"
-                            v-model="newInterest"
-                            @keydown.delete="removeLastItem"
-                            @keypress.enter.prevent
-                            @keyup.enter="addInterest" />
-                    </div>
-                </div>
-            </div>
+            <FormField
+                class="sm:col-span-2"
+                label="الاهتمامات"
+                type="FormFieldTags"
+                @send-data-to-grand-parent="updateDataInterests" />
             <div class="mt-5 flex items-center justify-end sm:col-span-2">
                 <button
                     type="submit"
@@ -66,40 +40,14 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch } from 'vue';
+import { reactive, watch } from 'vue';
 import axios from 'redaxios';
 
 import FormField from './FormField.vue';
 import CreatePlus from './icons/CreatePlus.vue';
-import RemoveX from './icons/RemoveX.vue';
 import { useObject } from '@/stores/useObject';
 
 const obj = useObject();
-
-// #region interests
-const newInterest = ref('');
-
-function addInterest() {
-    if (newInterest.value === '') return;
-    data.interests.push(newInterest.value);
-    newInterest.value = '';
-}
-
-function deleteInterest(event, deletedInterest) {
-    data.interests.splice(data.interests.indexOf(deletedInterest), 1);
-}
-
-function focusOnChildInput(event) {
-    const parentDiv = event.target;
-    const childInput = parentDiv.querySelector('input');
-    childInput.focus();
-}
-
-function removeLastItem() {
-    if (newInterest.value !== '') return;
-    data.interests.pop();
-}
-// #endregion
 
 const data = reactive({
     name: '',
@@ -113,6 +61,10 @@ const data = reactive({
 
 function updateDataSocialMedia(socialMediaObject) {
     data.socialMediaLinks = socialMediaObject;
+}
+
+function updateDataInterests(interestsArray) {
+    data.interests = interestsArray;
     console.log(data);
 }
 

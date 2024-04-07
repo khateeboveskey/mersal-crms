@@ -13,7 +13,7 @@
 import { useIcon } from '@/stores/useIcon';
 
 let props = defineProps({
-    title: String
+    title: String,
 });
 
 const setting = useIcon();

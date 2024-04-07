@@ -10,13 +10,13 @@
 
     * {
         font-family: 'RB', Arial, sans-serif;
-        @apply [&::-webkit-scrollbar]:w-[5px] [&::-webkit-scrollbar]:h-[5px];
+        @apply [&::-webkit-scrollbar]:h-[5px] [&::-webkit-scrollbar]:w-[5px];
         @apply [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-900;
         @apply [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-primary-500;
     }
 
     /* Hiding arrows from number input */
-    input[type="number"] {
+    input[type='number'] {
         @apply [&::-webkit-inner-spin-button]:appearance-none;
     }
 
@@ -26,10 +26,14 @@
             scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
         }
     }
+
+    /* Development diagnosis purposes */
+    /* * {
+    border: 2px solid red;
+    } */
 }
 
 @layer utilities {
-
     /* Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
         display: none;

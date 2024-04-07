@@ -45,9 +45,9 @@ import AppSidebarLinks from './AppSidebarLinks.vue';
 import LogoGithub from './icons/LogoGithub.vue';
 
 // Icons
-import ChartDonut from './icons/ChartDonut.vue';
-import TwoUsers from './icons/TwoUsers.vue';
-import DealTag from './icons/DealTag.vue';
+import IconHome from './icons/IconHome.vue';
+import IconUser from './icons/IconUser.vue';
+import IconTag from './icons/IconTag.vue';
 import MersalLogo from '@/assets/imgs/MersalLogo.vue';
 
 // Data
@@ -55,18 +55,18 @@ const tabs = [
     {
         title: 'الرئيسية',
         route: '/',
-        icon: ChartDonut
+        icon: IconHome,
     },
     {
         title: 'جهات الاتصال',
         route: '/contacts',
-        icon: TwoUsers
+        icon: IconUser,
     },
     {
         title: 'العروض',
         route: '/deals',
-        icon: DealTag
-    }
+        icon: IconTag,
+    },
 ];
 const routerLinkClasses = 'hover:bg-slate-800 rounded-lg text-slate-600';
 const routerLinkActiveClasses =

@@ -68,14 +68,14 @@
                             <button
                                 type="button"
                                 class="inline-flex items-center rounded-s-lg border border-gray-200 px-4 py-2 text-sm font-medium text-primary-500 focus:z-10 focus:text-primary-500 focus:ring-2 focus:ring-primary-500 dark:border-gray-700 dark:hover:bg-primary-950 dark:focus:ring-primary-500">
-                                <EditPen class="me-2" />
+                                <IconPenEdit class="me-2 h-5 w-5 text-primary-500" />
                                 تعديل
                             </button>
                             <button
                                 @click="deleteContact(contact.id)"
                                 type="button"
                                 class="dark:text-red inline-flex items-center rounded-e-lg border border-s-0 border-red-500 px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-500 hover:text-red-700 focus:z-10 focus:text-red-700 focus:ring-2 focus:ring-red-700 dark:border-gray-700 dark:hover:bg-red-950 dark:hover:text-red-500 dark:focus:text-red-500 dark:focus:ring-red-500">
-                                <DeleteTrash class="me-2 h-5 w-5 text-red-500" />
+                                <IconDeleteTrash class="me-2 h-5 w-5 text-red-500" />
                                 حذف
                             </button>
                         </div>
@@ -102,8 +102,8 @@
 import ModalComponent from '../components/ModalComponent.vue';
 
 // Icons
-import DeleteTrash from '../components/icons/DeleteTrash.vue';
-import EditPen from '../components/icons/EditPen.vue';
+import IconDeleteTrash from '../components/icons/IconDeleteTrash.vue';
+import IconPenEdit from '../components/icons/IconPenEdit.vue';
 
 // Stores
 import { useUrl } from '@/stores/useUrl';

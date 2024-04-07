@@ -29,7 +29,7 @@
                                     @click="deleteContact"
                                     type="button"
                                     class="inline-flex items-center rounded-lg bg-red-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400 dark:focus:ring-red-400">
-                                    <DeleteTrash class="me-2 h-5 w-5 text-white" />
+                                    <IconDeleteTrash class="me-2 h-5 w-5 text-white" />
                                     تأكيد
                                 </button>
                             </div>
@@ -44,12 +44,12 @@
 <script setup>
 import axios from 'redaxios';
 
-import DeleteTrash from '../components/icons/DeleteTrash.vue';
+import IconDeleteTrash from '../components/icons/IconDeleteTrash.vue';
 const props = defineProps({
     show: { type: Boolean, default: false },
     contactId: {
-        type: String
-    }
+        type: String,
+    },
 });
 const emit = defineEmits(['hideModal', 'hideFromList']);
 

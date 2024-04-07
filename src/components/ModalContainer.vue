@@ -13,7 +13,7 @@
                 leave-active-class="transition duration-200"
                 leave-to-class="opacity-0 scale-90	">
                 <div
-                    class="max-w-screen w-screen sm:w-auto rounded-lg bg-white p-10 shadow dark:bg-gray-700 md:my-5"
+                    class="max-w-screen w-screen rounded-lg bg-white p-10 shadow dark:bg-gray-700 sm:w-auto md:my-5"
                     v-show="props.show">
                     <div
                         class="mb-3 flex items-center justify-between border-b pb-3 dark:border-gray-600 sm:col-span-2">

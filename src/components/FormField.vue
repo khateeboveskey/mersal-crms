@@ -26,11 +26,14 @@
 
 <script setup>
 import FormFieldUrl from './FormFieldUrl.vue';
+import FormFieldTags from './FormFieldTags.vue';
 
 function getComponenet(componentName) {
     switch (componentName) {
         case 'FormFieldUrl':
             return FormFieldUrl;
+        case 'FormFieldTags':
+            return FormFieldTags;
         default:
             break;
     }
