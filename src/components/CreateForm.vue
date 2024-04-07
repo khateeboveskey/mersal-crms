@@ -6,84 +6,23 @@
                 <span class="required"></span>
                 على أن الحقل إجباري
             </div>
-            <div>
-                <label
-                    for="name"
-                    class="required mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                    الاسم
-                </label>
-                <input
-                    v-model="data.name"
-                    required
-                    type="text"
-                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500" />
-            </div>
-            <div>
-                <label
-                    class="required mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                    رقم الهاتف
-                </label>
-                <input
-                    v-model="data.phoneNo"
-                    required
-                    min="9"
-                    type="number"
-                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500" />
-            </div>
-            <div class="sm:col-span-2">
-                <label
-                    for="description"
-                    class="required mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                    البريد الإلكتروني
-                </label>
-                <input
-                    v-model="data.email"
-                    dir="ltr"
-                    required
-                    type="email"
-                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500" />
-            </div>
-            <div>
-                <label
-                    for="name"
-                    class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                    تاريخ الميلاد
-                </label>
-                <input
-                    v-model="data.birthDate"
-                    type="date"
-                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500" />
-            </div>
-            <div>
-                <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                    العنوان
-                </label>
-                <input
-                    v-model="data.address"
-                    type="text"
-                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500" />
-            </div>
-            <div class="sm:col-span-2">
-                <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                    روابط حسابات وسائل التواصل
-                </label>
-                <div class="flex flex-col gap-2">
-                    <span
-                        v-for="(socialMediaLinkInput, index) in 3"
-                        :key="socialMediaLinkInput"
-                        dir="ltr"
-                        class="flex flex-row items-center gap-2">
-                        <component
-                            class="h-6 w-6 text-gray-400"
-                            :is="socialMediaIcons[index].value"></component>
-                        <input
-                            v-model="socialMediaLinks[index]"
-                            @input="changeSocialMediaIcon($event, index), updateObject()"
-                            type="text"
-                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500" />
-                    </span>
-                </div>
-            </div>
+            <FormField label="الاسم" v-model="data.name" required type="text" />
+            <FormField label="رقم الهاتف" v-model="data.phoneNo" required type="number" />
+            <FormField
+                class="sm:col-span-2"
+                dir="ltr"
+                label="البريد الإلكتروني"
+                v-model="data.email"
+                required
+                type="email" />
+            <FormField label="تاريخ الميلاد" v-model="data.birthDate" type="date" />
+            <FormField label="العنوان" v-model="data.address" type="text" />
+            <FormField
+                class="sm:col-span-2"
+                label="روابط حسابات وسائل التواصل"
+                v-model="data.address"
+                type="FormFieldUrl"
+                @send-data-to-grand-parent="updateDataSocialMedia" />
             <div class="sm:col-span-2">
                 <label
                     for="description"
@@ -127,51 +66,17 @@
 </template>
 
 <script setup>
-import { initFlowbite } from 'flowbite';
-import { onMounted, ref, markRaw, reactive, watch } from 'vue';
+import { ref, reactive, watch } from 'vue';
 import axios from 'redaxios';
 
-import { useUrl } from '@/stores/useUrl';
-import { useIcon } from '@/stores/useIcon';
-
-const urlRegex = useUrl();
-const icon = useIcon();
-
-onMounted(() => {
-    initFlowbite();
-});
-
+import FormField from './FormField.vue';
 import CreatePlus from './icons/CreatePlus.vue';
 import RemoveX from './icons/RemoveX.vue';
+import { useObject } from '@/stores/useObject';
 
-import InternetEarth from './icons/InternetEarth.vue';
+const obj = useObject();
 
-const socialMediaIcons = [
-    ref(markRaw(InternetEarth)),
-    ref(markRaw(InternetEarth)),
-    ref(markRaw(InternetEarth)),
-];
-
-function changeSocialMediaIcon(event, index) {
-    const socialMediaName = urlRegex.extractWebsiteName(event.target.value);
-    socialMediaIcons[index].value = icon.getSocialMediaIconComponent(socialMediaName);
-}
-
-const socialMediaLinks = reactive([]);
-
-function updateObject() {
-    data.socialMediaLinks = {};
-    socialMediaLinks.forEach((url) => {
-        if (url !== '') {
-            if (urlRegex.extractWebsiteName(url) === '') {
-                data.socialMediaLinks[url] = url;
-            } else {
-                data.socialMediaLinks[urlRegex.extractWebsiteName(url)] = url;
-            }
-        }
-    });
-}
-
+// #region interests
 const newInterest = ref('');
 
 function addInterest() {
@@ -184,30 +89,6 @@ function deleteInterest(event, deletedInterest) {
     data.interests.splice(data.interests.indexOf(deletedInterest), 1);
 }
 
-const data = reactive({
-    name: '',
-    phoneNo: '',
-    email: '',
-    address: '',
-    socialMediaLinks: {},
-    interests: [],
-    birthDate: '',
-});
-
-function getOnlyFilled(obj) {
-    const filledObj = { ...obj };
-    for (const key in filledObj) {
-        if (filledObj[key].length === 0) {
-            delete filledObj[key];
-        }
-    }
-    return filledObj;
-}
-
-watch(data, () => {
-    getOnlyFilled(data);
-});
-
 function focusOnChildInput(event) {
     const parentDiv = event.target;
     const childInput = parentDiv.querySelector('input');
@@ -218,12 +99,32 @@ function removeLastItem() {
     if (newInterest.value !== '') return;
     data.interests.pop();
 }
+// #endregion
+
+const data = reactive({
+    name: '',
+    phoneNo: '',
+    email: '',
+    address: '',
+    socialMediaLinks: {},
+    interests: [],
+    birthDate: '',
+});
+
+function updateDataSocialMedia(socialMediaObject) {
+    data.socialMediaLinks = socialMediaObject;
+    console.log(data);
+}
+
+watch(data, () => {
+    obj.getOnlyFilled(data);
+});
 
 async function sendData() {
     try {
         const res = await axios.post(
             'http://localhost:3000/contacts',
-            JSON.stringify(getOnlyFilled(data)),
+            JSON.stringify(obj.getOnlyFilled(data)),
         );
         console.log(res);
     } catch (error) {
