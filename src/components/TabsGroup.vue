@@ -1,6 +1,6 @@
 <template>
-    <div class="my-5 md:mt-8">
-        <span class="hidden text-slate-700 md:block">{{ props.title }}</span>
+    <div>
+        <span v-if="props.title" class="text-slate-00 ms-4 mt-5 hidden md:block">{{ props.title }}</span>
         <div class="flex justify-around gap-3 md:flex-col md:justify-between">
             <slot></slot>
         </div>
@@ -9,6 +9,6 @@
 
 <script setup>
 const props = defineProps({
-    title: String
+    title: String,
 });
 </script>
