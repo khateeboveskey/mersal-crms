@@ -1,6 +1,6 @@
 <template>
     <nav
-        class="fixed bottom-0 z-10 flex h-fit w-screen flex-row justify-between rounded-t-xl bg-slate-100 px-4 md:static md:right-0 md:h-screen md:w-fit md:flex-col md:rounded-none md:rounded-e-xl dark:bg-slate-900">
+        class="fixed bottom-0 z-10 flex h-fit w-screen flex-row justify-between rounded-t-xl bg-white px-4 md:static md:right-0 md:h-screen md:w-fit md:flex-col md:rounded-none md:rounded-e-xl dark:bg-slate-900">
         <section class="w-full justify-between align-middle">
             <BrandIdentity>
                 <template #logo>

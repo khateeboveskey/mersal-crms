@@ -2,9 +2,9 @@
     <div class="relative overflow-x-auto overflow-y-hidden rounded-lg">
         <table
             v-if="contactsDataSource"
-            class="w-full text-left text-sm text-gray-500 shadow-lg rtl:text-right dark:text-gray-400">
+            class="w-full text-left text-sm text-gray-500 shadow rtl:text-right dark:text-gray-400">
             <thead
-                class="bg-gray-100 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+                class="bg-gray-200 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">الاسم</th>
                     <th scope="col" class="px-6 py-3">الرقم</th>

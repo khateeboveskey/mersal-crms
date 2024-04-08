@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-slate-50 p-10 dark:bg-slate-950">
+    <div class="bg-gray-100 p-10 dark:bg-slate-950">
         <section class="mb-5 flex w-full flex-row justify-between gap-5">
             <div class="relative flex-auto">
                 <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4">
