@@ -67,3 +67,51 @@ onMounted(() => {
     getLocations();
 });
 </script>
+
+<script setup>
+import { onMounted, ref } from 'vue';
+import axios from 'redaxios';
+import IconDeleteTrash from '@/components/icons/IconDeleteTrash.vue';
+
+let locations = ref([]);
+
+async function getLocations() {
+    try {
+        const res = await axios.get('http://localhost:3000/locations');
+        locations.value = res.data;
+    } catch (error) {
+        console.error('Error retrieving contacts:', error);
+    }
+}
+
+let newLocation = ref({ name: '' });
+
+async function addLocation() {
+    console.log(locations.value);
+    if (newLocation.value.name !== '') {
+        locations.value.push({ name: newLocation.value.name });
+        try {
+            await axios.post('http://localhost:3000/locations', {
+                name: newLocation.value.name,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+        newLocation.value.name = '';
+    }
+}
+
+async function deleteLocation(id, index) {
+    try {
+        await axios.delete(`http://localhost:3000/locations/${id}`);
+        locations.value.splice(index, 1);
+        console.log('Hi');
+    } catch (error) {
+        console.error('Error deleting location:', error);
+    }
+}
+
+onMounted(() => {
+    getLocations();
+});
+</script>
