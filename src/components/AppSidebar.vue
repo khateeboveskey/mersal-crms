@@ -1,6 +1,6 @@
 <template>
     <nav
-        class="fixed bottom-0 z-10 flex h-fit w-screen flex-row justify-between rounded-t-xl bg-slate-100 px-4 dark:bg-slate-900 md:static md:right-0 md:h-screen md:w-fit md:flex-col md:rounded-none md:rounded-e-xl">
+        class="fixed bottom-0 z-10 flex h-fit w-screen flex-row justify-between rounded-t-xl bg-slate-100 px-4 md:static md:right-0 md:h-screen md:w-fit md:flex-col md:rounded-none md:rounded-e-xl dark:bg-slate-900">
         <section class="w-full justify-between align-middle">
             <BrandIdentity>
                 <template #logo>
@@ -24,11 +24,13 @@
         <section class="hidden md:block">
             <AppSidebarLinks>
                 <a
-                    class="rounded-lg bg-transparent p-3 text-slate-400 hover:bg-slate-200 dark:text-slate-500 dark:hover:bg-slate-800"
+                    class="h-min rounded-lg bg-transparent p-3 text-slate-400 hover:bg-slate-200 dark:text-slate-500 dark:hover:bg-slate-800"
                     href="https://github.com/khateeboveskey/mersal-crms"
                     target="_blank">
                     <LogoGithub class="w-7" />
                 </a>
+                <DarkModeSwitch
+                    class="rounded-lg bg-transparent p-3 text-slate-400 hover:bg-slate-200 dark:text-slate-500 dark:hover:bg-slate-800" />
             </AppSidebarLinks>
         </section>
     </nav>
@@ -42,6 +44,7 @@ import BrandIdentity from './BrandIdentity.vue';
 import TabsGroup from './TabsGroup.vue';
 import TabItem from './TabItem.vue';
 import AppSidebarLinks from './AppSidebarLinks.vue';
+import DarkModeSwitch from './DarkModeSwitch.vue';
 import LogoGithub from './icons/LogoGithub.vue';
 
 // Icons
