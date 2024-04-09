@@ -16,10 +16,12 @@
             :type="props.type"
             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-primary-500 dark:focus:ring-primary-500" />
         <component
+            :data="dataFromGrandParent"
             v-else
             :id="props.id"
             :is="getComponenet(props.type)"
             v-bind="{ required: props.required }"
+            :options-source="props.optionsSource"
             @send-data-to-parent="sendToGrandParent"></component>
     </div>
 </template>
@@ -27,6 +29,7 @@
 <script setup>
 import FormFieldUrl from './FormFieldUrl.vue';
 import FormFieldTags from './FormFieldTags.vue';
+import FormFieldSelect from './FormFieldSelect.vue';
 
 function getComponenet(componentName) {
     switch (componentName) {
@@ -34,6 +37,8 @@ function getComponenet(componentName) {
             return FormFieldUrl;
         case 'FormFieldTags':
             return FormFieldTags;
+        case 'FormFieldSelect':
+            return FormFieldSelect;
         default:
             break;
     }
@@ -45,14 +50,25 @@ const props = defineProps({
     id: String,
     label: String,
     dir: String,
+    /**
+     * optionsSource data comes from
+     * CreateForm.vue -> FormField.vue -> FormFieldSelect.vue
+     * GrandParent-Child Communaction data should be
+     * provide()-d from the GrandParent (CreateForm.vue)
+     * and inject()-ed from Child (FormFieldSelect.vue)
+     * see https://vuejs.org/guide/components/provide-inject.html
+     * but this is not working 
+     * todo: fix provide() and inject() functionality
+     */
+    optionsSource: Array,
 });
 
 const model = defineModel();
 
 const emit = defineEmits(['sendDataToGrandParent']);
 
-function sendToGrandParent(socialMediaObject) {
-    emit('sendDataToGrandParent', socialMediaObject);
+function sendToGrandParent(sentData) {
+    emit('sendDataToGrandParent', sentData);
 }
 
 const isHTMLInputType =

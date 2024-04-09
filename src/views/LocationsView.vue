@@ -25,16 +25,11 @@ import { onMounted, ref } from 'vue';
 import axios from 'redaxios';
 import IconDeleteTrash from '@/components/icons/IconDeleteTrash.vue';
 
+import { useLocationsData } from '@/stores/useLocationsData';
+
 let locations = ref([]);
 
-async function getLocations() {
-    try {
-        const res = await axios.get('http://localhost:3000/locations');
-        locations.value = res.data;
-    } catch (error) {
-        console.error('Error retrieving contacts:', error);
-    }
-}
+const locationData = useLocationsData();
 
 let newLocation = ref({ name: '' });
 
@@ -63,7 +58,7 @@ async function deleteLocation(id, index) {
     }
 }
 
-onMounted(() => {
-    getLocations();
+onMounted(async () => {
+    locations.value = await locationData.getLocations();
 });
 </script>

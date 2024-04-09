@@ -15,8 +15,12 @@
                 v-model="data.email"
                 required
                 type="email" />
-            <FormField label="تاريخ الميلاد" v-model="data.birthDate" type="date" />
-            <FormField label="العنوان" v-model="data.address" type="text" />
+            <FormField label="تاريخ الميلاد" v-model="birthDate" type="date" />
+            <FormField
+                label="العنوان"
+                :options-source="locations"
+                @send-data-to-grand-parent="updateDataAddressId"
+                type="FormFieldSelect" />
             <FormField
                 class="sm:col-span-2"
                 label="روابط حسابات وسائل التواصل"
@@ -40,27 +44,43 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue';
+import { reactive, watch, onMounted, ref, computed } from 'vue';
 import axios from 'redaxios';
 
 import FormField from './FormField.vue';
 import CreatePlus from './icons/CreatePlus.vue';
 import { useObject } from '@/stores/useObject';
+import { useLocationsData } from '@/stores/useLocationsData';
+import { useDateFormat } from '@vueuse/core';
 
 const obj = useObject();
+const locationData = useLocationsData();
+
+const birthDate = ref('');
+
+const formattedBirthDate = computed(() => {
+    return useDateFormat(birthDate.value, 'YYYY-M-D');
+});
 
 const data = reactive({
     name: '',
     phoneNo: '',
     email: '',
-    address: '',
+    addressId: '',
     socialMediaLinks: {},
     interests: [],
-    birthDate: '',
+    birthDate: formattedBirthDate.value | '',
 });
 
 function updateDataSocialMedia(socialMediaObject) {
     data.socialMediaLinks = socialMediaObject;
+}
+
+function updateDataAddressId(selectedOptionId) {
+    /**
+     * todo: make Id as Number
+     */
+    data.addressId = selectedOptionId;
 }
 
 function updateDataInterests(interestsArray) {
@@ -83,4 +103,10 @@ async function sendData() {
         console.log(error);
     }
 }
+
+const locations = ref([]);
+
+onMounted(async () => {
+    locations.value = await locationData.getLocations();
+});
 </script>
