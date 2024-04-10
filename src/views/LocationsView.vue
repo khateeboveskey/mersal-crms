@@ -2,12 +2,14 @@
     <div class="bg-gray-100 dark:bg-slate-950">
         <div class="grid gap-2 sm:grid-cols-2 md:grid-cols-3">
             <span
-                class="flex flex-row justify-between rounded-lg border bg-white p-5 text-black shadow-sm dark:border-gray-700 dark:bg-slate-800 dark:text-white"
+                class="flex flex-row items-center justify-between rounded-lg border bg-white py-3 pe-3 ps-5 text-black shadow-sm dark:border-gray-700 dark:bg-slate-800 dark:text-white"
                 v-for="(location, index) in locations"
                 :key="location.id">
                 <span>{{ location.name }}</span>
-                <button @click="deleteLocation(location.id, index)">
-                    <IconDeleteTrash class="h-full text-red-500" />
+                <button
+                    class="rounded-lg p-3 hover:bg-red-100 dark:hover:bg-red-950"
+                    @click="deleteLocation(location.id, index)">
+                    <IconDeleteTrash class="h-5 text-red-500" />
                 </button>
             </span>
             <input
