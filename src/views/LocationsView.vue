@@ -59,6 +59,12 @@ async function deleteLocation(id, index) {
 }
 
 onMounted(async () => {
-    locations.value = await locationData.getLocations();
+    if (locationData.locations) {
+        console.log(locationData.locations);
+        locations.value = locationData.locations;
+    } else {
+        console.log('Request Sent!');
+        locations.value = await locationData.getLocations();
+    }
 });
 </script>

@@ -107,6 +107,12 @@ async function sendData() {
 const locations = ref([]);
 
 onMounted(async () => {
-    locations.value = await locationData.getLocations();
+    if (!locationData.locations) {
+        console.log('Request Sent!');
+        locations.value = await locationData.getLocations();
+    } else {
+        console.log(locationData.locations);
+        locations.value = locationData.locations;
+    }
 });
 </script>
