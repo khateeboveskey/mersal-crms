@@ -30,6 +30,7 @@
 import FormFieldUrl from './FormFieldUrl.vue';
 import FormFieldTags from './FormFieldTags.vue';
 import FormFieldSelect from './FormFieldSelect.vue';
+import FormFieldCheckbox from './FormFieldCheckbox.vue';
 
 function getComponenet(componentName) {
     switch (componentName) {
@@ -39,6 +40,8 @@ function getComponenet(componentName) {
             return FormFieldTags;
         case 'FormFieldSelect':
             return FormFieldSelect;
+        case 'FormFieldCheckbox':
+            return FormFieldCheckbox;
         default:
             break;
     }
@@ -57,7 +60,7 @@ const props = defineProps({
      * provide()-d from the GrandParent (CreateForm.vue)
      * and inject()-ed from Child (FormFieldSelect.vue)
      * see https://vuejs.org/guide/components/provide-inject.html
-     * but this is not working 
+     * but this is not working
      * todo: fix provide() and inject() functionality
      */
     optionsSource: Array,

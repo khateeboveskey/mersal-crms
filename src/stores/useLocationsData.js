@@ -9,12 +9,16 @@ export const useLocationsData = defineStore('locationsData', {
     },
     actions: {
         async getLocations() {
-            try {
-                const res = await axios.get('http://localhost:3000/locations');
-                this.locations = res.data;
+            if (this.locations) {
                 return this.locations;
-            } catch (error) {
-                console.error('Error retrieving contacts:', error);
+            } else {
+                try {
+                    const res = await axios.get('http://localhost:3000/locations');
+                    this.locations = res.data;
+                    return this.locations;
+                } catch (error) {
+                    console.error('Error retrieving contacts:', error);
+                }
             }
         },
     },

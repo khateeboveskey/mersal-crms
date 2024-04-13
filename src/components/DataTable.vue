@@ -54,13 +54,13 @@
                         </div>
                     </td>
                     <td class="px-6 py-4">{{ contact.birthDate }}</td>
-                    <td class="px-6 py-4">{{ contact.address }}</td>
+                    <td class="px-6 py-4">{{ getLocationNameFromId(contact.addressId) }}</td>
                     <td class="px-6 py-4">
                         <span
-                            v-for="interest in contact.interests"
-                            :key="interest"
+                            v-for="interestId in contact.interestsIds"
+                            :key="interestId"
                             class="mb-1 me-1 inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-900 dark:text-gray-300">
-                            {{ interest }}
+                            {{ getInterestNameFromId(interestId) }}
                         </span>
                     </td>
                     <td class="px-6 py-4">
@@ -182,8 +182,32 @@ function changeSocialMediaIcon(socialMediaLink) {
     return icon.getSocialMediaIconComponent(socialMediaName);
 }
 
+import { useInterest } from '@/stores/useInterest';
+import { useLocationsData } from '@/stores/useLocationsData';
+const interest = useInterest();
+const location = useLocationsData();
+
+const interests = ref([]);
+const locations = ref([]);
+
+function getInterestNameFromId(interestId) {
+    const interest = interests.value.find((obj) => obj.id === interestId);
+    return interest.name;
+}
+
+function getLocationNameFromId(locationId) {
+    if (!locations.value) return '';
+    const location = locations.value.find((obj) => obj.id === locationId);
+    return location.name;
+}
+
 // Lifecycle Hooks
 onMounted(() => {
     getContacts();
+});
+
+onMounted(async () => {
+    interests.value = await interest.getInterests();
+    locations.value = await location.getLocations();
 });
 </script>

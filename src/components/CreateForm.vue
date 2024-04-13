@@ -15,7 +15,9 @@
                 v-model="data.email"
                 required
                 type="email" />
-            <FormField label="تاريخ الميلاد" v-model="birthDate" type="date" />
+            {{ data.birthDate }}
+            <br />
+            <FormField label="تاريخ الميلاد" v-model="data.birthDate" type="date" />
             <FormField
                 label="العنوان"
                 :options-source="locations"
@@ -29,8 +31,8 @@
             <FormField
                 class="sm:col-span-2"
                 label="الاهتمامات"
-                type="FormFieldTags"
-                @send-data-to-grand-parent="updateDataInterests" />
+                @send-data-to-grand-parent="updateDataInterests"
+                type="FormFieldCheckbox" />
             <div class="mt-5 flex items-center justify-end sm:col-span-2">
                 <button
                     type="submit"
@@ -44,7 +46,7 @@
 </template>
 
 <script setup>
-import { reactive, watch, onMounted, ref, computed } from 'vue';
+import { reactive, onMounted, ref } from 'vue';
 import axios from 'redaxios';
 
 import FormField from './FormField.vue';
@@ -56,20 +58,14 @@ import { useDateFormat } from '@vueuse/core';
 const obj = useObject();
 const locationData = useLocationsData();
 
-const birthDate = ref('');
-
-const formattedBirthDate = computed(() => {
-    return useDateFormat(birthDate.value, 'YYYY-M-D');
-});
-
 const data = reactive({
     name: '',
     phoneNo: '',
     email: '',
     addressId: '',
     socialMediaLinks: {},
-    interests: [],
-    birthDate: formattedBirthDate.value | '',
+    interestsIds: [],
+    birthDate: '',
 });
 
 function updateDataSocialMedia(socialMediaObject) {
@@ -84,35 +80,25 @@ function updateDataAddressId(selectedOptionId) {
 }
 
 function updateDataInterests(interestsArray) {
-    data.interests = interestsArray;
-    console.log(data);
+    data.interestsIds = interestsArray;
 }
 
-watch(data, () => {
-    obj.getOnlyFilled(data);
-});
-
 async function sendData() {
+    const cleanData = obj.getOnlyFilled({
+        ...data,
+        birthDate: useDateFormat(data.birthDate, 'YYYY-M-D').value,
+    });
     try {
-        const res = await axios.post(
-            'http://localhost:3000/contacts',
-            JSON.stringify(obj.getOnlyFilled(data)),
-        );
-        console.log(res);
+        await axios.post('http://localhost:3000/contacts', JSON.stringify(cleanData));
     } catch (error) {
-        console.log(error);
+        alert('Error: ' + error);
+        console.error(error);
     }
 }
 
 const locations = ref([]);
 
 onMounted(async () => {
-    if (!locationData.locations) {
-        console.log('Request Sent!');
-        locations.value = await locationData.getLocations();
-    } else {
-        console.log(locationData.locations);
-        locations.value = locationData.locations;
-    }
+    locations.value = await locationData.getLocations();
 });
 </script>
