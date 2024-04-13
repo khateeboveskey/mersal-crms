@@ -18,7 +18,7 @@
             <FormField label="تاريخ الميلاد" v-model="data.birthDate" type="date" />
             <FormField
                 label="العنوان"
-                :options-source="locations"
+                :options-source="request.locations"
                 @send-data-to-grand-parent="updateDataAddressId"
                 type="FormFieldSelect" />
             <FormField

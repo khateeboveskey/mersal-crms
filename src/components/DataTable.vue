@@ -191,9 +191,6 @@ function getLocationNameFromId(locationId) {
 // Lifecycle Hooks
 onMounted(async () => {
     contacts.value = await request.get('contacts');
-});
-
-onMounted(async () => {
     interests.value = await request.get('interests');
     locations.value = await request.get('locations');
 });

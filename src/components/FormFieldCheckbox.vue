@@ -1,6 +1,6 @@
 <template>
     <div>
-        <span v-for="interest in interests" :key="interest.id">
+        <span v-for="interest in request.interests" :key="interest.id">
             <input
                 class="peer hidden"
                 @change="pushId($event, interest.id)"

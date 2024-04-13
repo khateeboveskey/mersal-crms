@@ -16,6 +16,20 @@
         "00c2"
       ],
       "birthDate": "2003-7-3"
+    },
+    {
+      "id": "f4f1",
+      "name": "حسين علي",
+      "phoneNo": 776218541,
+      "email": "khateeboveskey@gmail.com",
+      "addressId": "63d7",
+      "socialMediaLinks": {
+        "facebook": "facebook.com/hussain"
+      },
+      "interestsIds": [
+        "839a"
+      ],
+      "birthDate": "2024-4-24"
     }
   ],
   "locations": [
