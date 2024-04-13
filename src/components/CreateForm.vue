@@ -15,7 +15,6 @@
                 v-model="data.email"
                 required
                 type="email" />
-            <br />
             <FormField label="تاريخ الميلاد" v-model="data.birthDate" type="date" />
             <FormField
                 label="العنوان"
