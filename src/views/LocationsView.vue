@@ -24,14 +24,11 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import axios from 'redaxios';
 import IconDeleteTrash from '@/components/icons/IconDeleteTrash.vue';
-
-import { useLocationsData } from '@/stores/useLocationsData';
+import { useData } from '@/stores/useData';
+const request = useData();
 
 let locations = ref([]);
-
-const locationData = useLocationsData();
 
 let newLocation = ref({ name: '' });
 
@@ -39,34 +36,19 @@ async function addLocation() {
     console.log(locations.value);
     if (newLocation.value.name !== '') {
         locations.value.push({ name: newLocation.value.name });
-        try {
-            await axios.post('http://localhost:3000/locations', {
-                name: newLocation.value.name,
-            });
-        } catch (error) {
-            console.log(error);
-        }
+        await request.post('locations', {
+            name: newLocation.value.name,
+        });
         newLocation.value.name = '';
     }
 }
 
 async function deleteLocation(id, index) {
-    try {
-        await axios.delete(`http://localhost:3000/locations/${id}`);
-        locations.value.splice(index, 1);
-        console.log('Hi');
-    } catch (error) {
-        console.error('Error deleting location:', error);
-    }
+    await request.delete(`locations/${id}`);
+    locations.value.splice(index, 1);
 }
 
 onMounted(async () => {
-    if (locationData.locations) {
-        console.log(locationData.locations);
-        locations.value = locationData.locations;
-    } else {
-        console.log('Request Sent!');
-        locations.value = await locationData.getLocations();
-    }
+    locations.value = await request.get('locations');
 });
 </script>

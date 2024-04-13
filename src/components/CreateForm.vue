@@ -47,16 +47,13 @@
 
 <script setup>
 import { reactive, onMounted, ref } from 'vue';
-import axios from 'redaxios';
 
 import FormField from './FormField.vue';
 import CreatePlus from './icons/CreatePlus.vue';
 import { useObject } from '@/stores/useObject';
-import { useLocationsData } from '@/stores/useLocationsData';
 import { useDateFormat } from '@vueuse/core';
 
 const obj = useObject();
-const locationData = useLocationsData();
 
 const data = reactive({
     name: '',
@@ -88,17 +85,15 @@ async function sendData() {
         ...data,
         birthDate: useDateFormat(data.birthDate, 'YYYY-M-D').value,
     });
-    try {
-        await axios.post('http://localhost:3000/contacts', JSON.stringify(cleanData));
-    } catch (error) {
-        alert('Error: ' + error);
-        console.error(error);
-    }
+    request.post('contacts', cleanData);
 }
 
 const locations = ref([]);
 
+import { useData } from '@/stores/useData';
+const request = useData();
+
 onMounted(async () => {
-    locations.value = await locationData.getLocations();
+    locations.value = await request.get('locations');
 });
 </script>
