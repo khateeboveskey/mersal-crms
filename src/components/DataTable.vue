@@ -108,13 +108,14 @@ import IconPenEdit from '../components/icons/IconPenEdit.vue';
 // Stores
 import { useUrl } from '@/stores/useUrl';
 import { useIcon } from '@/stores/useIcon';
+import { useData } from '@/stores/useData';
 
 const urlRegex = useUrl();
 const icon = useIcon();
+const request = useData();
 
 // Vue's
 import { onMounted, ref, computed, watch } from 'vue';
-import axios from 'redaxios';
 
 // Data
 const contacts = ref(null);
@@ -123,15 +124,6 @@ const isResultFound = ref(null);
 let showModal = ref(false);
 let hiddenContactId = ref();
 let contactToDeleteId = ref(null);
-
-async function getContacts() {
-    try {
-        const res = await axios.get('http://localhost:3000/contacts');
-        contacts.value = res.data;
-    } catch (error) {
-        console.error('Error retrieving contacts:', error);
-    }
-}
 
 function deleteContact(contactId) {
     showModal.value = true;
@@ -182,11 +174,6 @@ function changeSocialMediaIcon(socialMediaLink) {
     return icon.getSocialMediaIconComponent(socialMediaName);
 }
 
-import { useInterest } from '@/stores/useInterest';
-import { useLocationsData } from '@/stores/useLocationsData';
-const interest = useInterest();
-const location = useLocationsData();
-
 const interests = ref([]);
 const locations = ref([]);
 
@@ -202,12 +189,12 @@ function getLocationNameFromId(locationId) {
 }
 
 // Lifecycle Hooks
-onMounted(() => {
-    getContacts();
+onMounted(async () => {
+    contacts.value = await request.get('contacts');
 });
 
 onMounted(async () => {
-    interests.value = await interest.getInterests();
-    locations.value = await location.getLocations();
+    interests.value = await request.get('interests');
+    locations.value = await request.get('locations');
 });
 </script>

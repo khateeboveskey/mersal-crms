@@ -24,48 +24,31 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import axios from 'redaxios';
 import IconDeleteTrash from '@/components/icons/IconDeleteTrash.vue';
 
-import { useInterest } from '@/stores/useInterest';
+import { useData } from '@/stores/useData';
+const request = useData();
 
 let interests = ref([]);
-
-const interestData = useInterest();
 
 let newInterest = ref({ name: '' });
 
 async function addLocation() {
-    console.log(interests.value);
     if (newInterest.value.name !== '') {
         interests.value.push({ name: newInterest.value.name });
-        try {
-            await axios.post('http://localhost:3000/interests', {
-                name: newInterest.value.name,
-            });
-        } catch (error) {
-            console.log(error);
-        }
+        await request.post('interests', {
+            name: newInterest.value.name,
+        });
         newInterest.value.name = '';
     }
 }
 
 async function deleteLocation(id, index) {
-    try {
-        await axios.delete(`http://localhost:3000/interests/${id}`);
-        interests.value.splice(index, 1);
-    } catch (error) {
-        console.error('Error deleting interest:', error);
-    }
+    await request.delete(`interests/${id}`);
+    interests.value.splice(index, 1);
 }
 
 onMounted(async () => {
-    if (interestData.interests) {
-        console.log(interestData.interests);
-        interests.value = interestData.interests;
-    } else {
-        console.log('Request Sent!');
-        interests.value = await interestData.getInterests();
-    }
+    interests.value = await request.get('interests');
 });
 </script>

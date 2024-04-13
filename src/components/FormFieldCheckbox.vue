@@ -18,14 +18,12 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useInterest } from '@/stores/useInterest';
 import RemoveX from './icons/RemoveX.vue';
 
 const emit = defineEmits(['sendDataToParent']);
 
 const interests = ref([]);
 const checkedInterestsIds = ref([]);
-const interestData = useInterest();
 
 function pushId(event, interestId) {
     if (event.target.checked) {
@@ -36,12 +34,11 @@ function pushId(event, interestId) {
     emit('sendDataToParent', checkedInterestsIds.value);
 }
 
+import { useData } from '@/stores/useData';
+const request = useData();
+
 onMounted(async () => {
-    if (interestData.interests) {
-        interests.value = interestData.interests;
-    } else {
-        interests.value = await interestData.getInterests();
-    }
+    interests.value = await request.get('interests');
 });
 </script>
 

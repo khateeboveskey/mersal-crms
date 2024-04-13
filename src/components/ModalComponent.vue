@@ -42,7 +42,8 @@
 </template>
 
 <script setup>
-import axios from 'redaxios';
+import { useData } from '@/stores/useData';
+const request = useData();
 
 import IconDeleteTrash from '../components/icons/IconDeleteTrash.vue';
 const props = defineProps({
@@ -54,7 +55,7 @@ const props = defineProps({
 const emit = defineEmits(['hideModal', 'hideFromList']);
 
 function deleteContact() {
-    axios.delete('http://localhost:3000/contacts/' + props.contactId);
+    request.delete(`contacts/${props.contactId}`);
     emit('hideModal');
     emit('hideFromList', props.contactId);
 }
