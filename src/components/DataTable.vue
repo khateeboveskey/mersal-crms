@@ -1,5 +1,7 @@
 <template>
-    <div class="relative overflow-x-auto overflow-y-hidden rounded-lg">
+    <div
+        :class="{ border: contactsDataSource }"
+        class="group relative overflow-x-auto overflow-y-hidden rounded-lg border-gray-300 dark:border-gray-700">
         <table
             v-if="contactsDataSource"
             class="w-full text-left text-sm text-gray-500 shadow rtl:text-right dark:text-gray-400">
@@ -20,12 +22,12 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="divide-y divide-gray-300 dark:divide-gray-700">
                 <tr
                     v-for="contact in contactsDataSource"
                     :key="contact.id"
                     v-show="contact.id !== hiddenContactId"
-                    class="border-b bg-white transition duration-300 last:border-0 dark:border-gray-700 dark:bg-gray-800">
+                    class="bg-white transition duration-300 dark:bg-gray-800">
                     <td
                         scope="row"
                         class="flex items-center whitespace-nowrap py-4 pe-6 ps-3 text-gray-900 dark:text-white">
@@ -95,15 +97,15 @@
         :contactId="contactToDeleteId"
         :show="showModal"
         @hide-modal="showModal = false"
-        @hide-from-list="hide" />
+        @hide-from-list="(c) => (hiddenContactId = c)" />
 </template>
 
 <script setup>
-import ModalComponent from '../components/ModalComponent.vue';
+import ModalComponent from '@/components/ModalComponent.vue';
 
 // Icons
-import IconDeleteTrash from '../components/icons/IconDeleteTrash.vue';
-import IconPenEdit from '../components/icons/IconPenEdit.vue';
+import IconDeleteTrash from '@/components/icons/IconDeleteTrash.vue';
+import IconPenEdit from '@/components/icons/IconPenEdit.vue';
 
 // Stores
 import { useUrl } from '@/stores/useUrl';
@@ -128,10 +130,6 @@ let contactToDeleteId = ref(null);
 function deleteContact(contactId) {
     showModal.value = true;
     contactToDeleteId.value = contactId;
-}
-
-function hide(c) {
-    hiddenContactId.value = c;
 }
 
 const props = defineProps({
@@ -178,20 +176,21 @@ const interests = ref([]);
 const locations = ref([]);
 
 function getInterestNameFromId(interestId) {
+    if (!interests.value || !interestId) return '';
     const interest = interests.value.find((obj) => obj.id === interestId);
     return interest.name;
 }
 
 function getLocationNameFromId(locationId) {
-    if (!locations.value) return '';
+    if (!locations.value || !locationId) return '';
     const location = locations.value.find((obj) => obj.id === locationId);
     return location.name;
 }
 
 // Lifecycle Hooks
 onMounted(async () => {
-    contacts.value = await request.get('contacts');
-    interests.value = await request.get('interests');
-    locations.value = await request.get('locations');
+    contacts.value = await request.get('/contacts');
+    interests.value = await request.get('/interests');
+    locations.value = await request.get('/locations');
 });
 </script>

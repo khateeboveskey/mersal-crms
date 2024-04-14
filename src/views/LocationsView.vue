@@ -36,7 +36,7 @@ async function addLocation() {
     console.log(locations.value);
     if (newLocation.value.name !== '') {
         locations.value.push({ name: newLocation.value.name });
-        await request.post('locations', {
+        await request.post('/locations', {
             name: newLocation.value.name,
         });
         newLocation.value.name = '';
@@ -44,11 +44,11 @@ async function addLocation() {
 }
 
 async function deleteLocation(id, index) {
-    await request.delete(`locations/${id}`);
+    await request.delete('/locations', id);
     locations.value.splice(index, 1);
 }
 
 onMounted(async () => {
-    locations.value = await request.get('locations');
+    locations.value = await request.get('/locations');
 });
 </script>

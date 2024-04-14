@@ -22,8 +22,8 @@ const emit = defineEmits(['sendDataToParent']);
  * and inject()-ed from Child (FormFieldSelect.vue)
  * see https://vuejs.org/guide/components/provide-inject.html
  * but this is not working
- * todo: fix provide() and inject() functionality
  */
+// todo: fix provide() and inject() functionality
 const props = defineProps({
     optionsSource: Array,
 });
@@ -39,6 +39,7 @@ const selectedOptionId = computed(() => {
 });
 
 watch(selectedOption, () => {
+    // todo: make Id as Number
     emit('sendDataToParent', selectedOptionId.value);
 });
 </script>

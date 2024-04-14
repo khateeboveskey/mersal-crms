@@ -52,10 +52,11 @@ const props = defineProps({
         type: String,
     },
 });
+
 const emit = defineEmits(['hideModal', 'hideFromList']);
 
 function deleteContact() {
-    request.delete(`contacts/${props.contactId}`);
+    request.delete('/contacts', props.contactId);
     emit('hideModal');
     emit('hideFromList', props.contactId);
 }

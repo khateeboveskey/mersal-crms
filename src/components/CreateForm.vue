@@ -19,18 +19,18 @@
             <FormField
                 label="العنوان"
                 :options-source="request.locations"
-                @send-data-to-grand-parent="updateDataAddressId"
+                @send-data-to-grand-parent="(optionId) => (data.addressId = optionId)"
                 type="FormFieldSelect" />
             <FormField
                 class="sm:col-span-2"
                 label="روابط حسابات وسائل التواصل"
                 type="FormFieldUrl"
-                @send-data-to-grand-parent="updateDataSocialMedia" />
+                @send-data-to-grand-parent="(dataObj) => (data.socialMediaLinks = dataObj)" />
             <FormField
                 class="sm:col-span-2"
                 label="الاهتمامات"
-                @send-data-to-grand-parent="updateDataInterests"
-                type="FormFieldCheckbox" />
+                type="FormFieldCheckbox"
+                @send-data-to-grand-parent="(dataArr) => (data.interestsIds = dataArr)" />
             <div class="mt-5 flex items-center justify-end sm:col-span-2">
                 <button
                     type="submit"
@@ -44,15 +44,22 @@
 </template>
 
 <script setup>
+// Vue's
 import { reactive, onMounted, ref } from 'vue';
 
+// Components
 import FormField from './FormField.vue';
 import CreatePlus from './icons/CreatePlus.vue';
+
+// Stores
 import { useObject } from '@/stores/useObject';
 import { useDateFormat } from '@vueuse/core';
+import { useData } from '@/stores/useData';
 
+const request = useData();
 const obj = useObject();
 
+const locations = ref([]);
 const data = reactive({
     name: '',
     phoneNo: '',
@@ -63,35 +70,15 @@ const data = reactive({
     birthDate: '',
 });
 
-function updateDataSocialMedia(socialMediaObject) {
-    data.socialMediaLinks = socialMediaObject;
-}
-
-function updateDataAddressId(selectedOptionId) {
-    /**
-     * todo: make Id as Number
-     */
-    data.addressId = selectedOptionId;
-}
-
-function updateDataInterests(interestsArray) {
-    data.interestsIds = interestsArray;
-}
-
 async function sendData() {
     const cleanData = obj.getOnlyFilled({
         ...data,
         birthDate: useDateFormat(data.birthDate, 'YYYY-M-D').value,
     });
-    request.post('contacts', cleanData);
+    request.post('/contacts', cleanData);
 }
 
-const locations = ref([]);
-
-import { useData } from '@/stores/useData';
-const request = useData();
-
 onMounted(async () => {
-    locations.value = await request.get('locations');
+    locations.value = await request.get('/locations');
 });
 </script>

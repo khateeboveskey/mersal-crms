@@ -13,9 +13,9 @@ export const useData = defineStore('data', {
         /**
          * Sends a POST request to the specified endpoint with the provided data.
          *
-         * @param {string} endpoint - The endpoint to send the POST request to.
-         * @param {Object} data - The data to be sent in the POST request.
-         * @returns {Promise<any>} - The response data from the POST request.
+         * @param {string} endpoint The endpoint to send the POST request to.
+         * @param {Object} data The data to be sent in the POST request.
+         * @returns {Promise<any>} The response data from the POST request.
          */
         async post(endpoint, data) {
             try {
@@ -30,31 +30,43 @@ export const useData = defineStore('data', {
             }
         },
         /**
-         * Sends a GET request to the specified endpoint and returns the response data.
+         * Sends a GET request to the specified endpoint and stores the response data in the corresponding state property.
          *
-         * @param {string} endpoint - The endpoint to send the GET request to.
-         * @returns {Promise<any>} - The response data from the GET request.
+         * @param {string} endpoint The endpoint to send the GET request to.
+         * @param {boolean} [requestData=false] Whether to fetch data from the API or use the cached data.
+         * @returns {Promise<any>} The response data from the GET request.
          */
         async get(endpoint, requestData = false) {
+            const noSlashEndpoint = endpoint.slice(1);
             if (requestData) {
                 try {
                     const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}${endpoint}`);
-                    this[endpoint] = res.data;
-                    return this[endpoint];
+                    // slice(1) to delete the leading '/'
+                    this[noSlashEndpoint] = res.data;
+                    return this[noSlashEndpoint];
                 } catch (error) {
                     console.error(`Error in ${endpoint} GET: ${error}`);
                 }
             } else {
-                if (this[endpoint].length) {
-                    return this[endpoint];
+                if (this[noSlashEndpoint].length) {
+                    return this[noSlashEndpoint];
                 } else {
                     return this.get(endpoint, true);
                 }
             }
         },
-        async delete(endpoint) {
+        /**
+         * Sends a DELETE request to the specified endpoint with the provided ID.
+         *
+         * @param {string} endpoint The endpoint to send the DELETE request to.
+         * @param {string} id The ID of the resource to delete.
+         * @returns {Promise<any>} The response data from the DELETE request.
+         */
+        async delete(endpoint, id) {
             try {
-                const res = await axios.delete(`${import.meta.env.VITE_APP_API_URL}${endpoint}`);
+                const res = await axios.delete(
+                    `${import.meta.env.VITE_APP_API_URL}${endpoint}/${id}`,
+                );
                 this.get(endpoint, true);
                 return res.data;
             } catch (error) {

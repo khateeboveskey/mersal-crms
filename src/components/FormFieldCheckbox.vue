@@ -38,7 +38,7 @@ import { useData } from '@/stores/useData';
 const request = useData();
 
 onMounted(async () => {
-    interests.value = await request.get('interests');
+    interests.value = await request.get('/interests');
 });
 </script>
 

@@ -36,7 +36,7 @@ let newInterest = ref({ name: '' });
 async function addLocation() {
     if (newInterest.value.name !== '') {
         interests.value.push({ name: newInterest.value.name });
-        await request.post('interests', {
+        await request.post('/interests', {
             name: newInterest.value.name,
         });
         newInterest.value.name = '';
@@ -44,11 +44,11 @@ async function addLocation() {
 }
 
 async function deleteLocation(id, index) {
-    await request.delete(`interests/${id}`);
+    await request.delete('/interests', id);
     interests.value.splice(index, 1);
 }
 
 onMounted(async () => {
-    interests.value = await request.get('interests');
+    interests.value = await request.get('/interests');
 });
 </script>

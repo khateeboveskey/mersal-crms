@@ -61,8 +61,8 @@ const props = defineProps({
      * and inject()-ed from Child (FormFieldSelect.vue)
      * see https://vuejs.org/guide/components/provide-inject.html
      * but this is not working
-     * todo: fix provide() and inject() functionality
      */
+    // todo: fix provide() and inject() functionality
     optionsSource: Array,
 });
 

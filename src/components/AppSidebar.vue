@@ -9,7 +9,7 @@
                 <template #name>مِرسال</template>
             </BrandIdentity>
             <TabsGroup
-                class="md:mb-5 md:border-b md:dark:border-slate-800 md:border-slate-200 md:pb-5 md:last:border-0"
+                class="md:mb-5 md:border-b md:border-slate-200 md:pb-5 md:last:border-0 md:dark:border-slate-800"
                 v-for="(tabGroup, index) in tabGroups"
                 :key="tabGroup">
                 <RouterLink
@@ -28,7 +28,7 @@
             </TabsGroup>
         </section>
         <section class="hidden md:block">
-            <AppSidebarLinks>
+            <div class="m-5 flex flex-row justify-center gap-2">
                 <a
                     class="h-min rounded-lg bg-transparent p-3 text-slate-400 hover:bg-slate-200 dark:text-slate-500 dark:hover:bg-slate-800"
                     href="https://github.com/khateeboveskey/mersal-crms"
@@ -37,19 +37,19 @@
                 </a>
                 <DarkModeSwitch
                     class="rounded-lg bg-transparent p-3 text-slate-400 hover:bg-slate-200 dark:text-slate-500 dark:hover:bg-slate-800" />
-            </AppSidebarLinks>
+            </div>
         </section>
     </nav>
 </template>
 
 <script setup>
+// #region imports
 // Vue's
 import { RouterLink } from 'vue-router';
 
 import BrandIdentity from './BrandIdentity.vue';
 import TabsGroup from './TabsGroup.vue';
 import TabItem from './TabItem.vue';
-import AppSidebarLinks from './AppSidebarLinks.vue';
 import DarkModeSwitch from './DarkModeSwitch.vue';
 import LogoGithub from './icons/LogoGithub.vue';
 
@@ -62,6 +62,7 @@ import IconTag from './icons/IconTag.vue';
 import IconLove from './icons/IconLove.vue';
 
 import MersalLogo from '@/assets/imgs/MersalLogo.vue';
+// #endregion
 
 // Data
 const tabGroups = [
