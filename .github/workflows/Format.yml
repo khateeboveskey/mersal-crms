@@ -23,10 +23,7 @@ jobs:
               run: npm install -D @vue/eslint-config-prettier prettier prettier-plugin-tailwindcss
 
             - name: Format
-              uses: creyD/prettier_action@v4.3
-              with:
-                  # This part is also where you can pass other options, for example:
-                  prettier_options: --write .
+              run: npx prettier --write .
 
             - name: Commit & Push
               uses: stefanzweifel/git-auto-commit-action@v4
