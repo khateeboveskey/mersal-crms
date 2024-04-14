@@ -21,9 +21,3 @@ npm install
 ```sh
 npm run dev
 ```
-
-**in parallel** with *json-server* to test API
-
-```sh
-npx json-server ./data/fakeDB.json
-```
