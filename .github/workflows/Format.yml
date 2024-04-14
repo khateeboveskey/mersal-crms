@@ -1,4 +1,4 @@
-name: Format
+name: CI
 
 # This action works with pull requests and pushes
 on:
