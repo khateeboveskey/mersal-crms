@@ -18,6 +18,9 @@ jobs:
               with:
                   # Make sure the actual branch is checked out when running on pull requests
                   ref: ${{ github.head_ref }}
+            
+            - name: Install Dependencies
+              run: npm install -D @vue/eslint-config-prettier prettier prettier-plugin-tailwindcss
 
             - name: Format
               uses: creyD/prettier_action@v4.3
