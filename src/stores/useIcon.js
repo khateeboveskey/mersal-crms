@@ -13,7 +13,7 @@ export const useIcon = defineStore('icon', {
     state: () => {
         return {
             sizeInRem: 1.5,
-            tailwindColor: 'slate-600'
+            tailwindColor: 'slate-600',
         };
     },
     actions: {
@@ -41,6 +41,6 @@ export const useIcon = defineStore('icon', {
                 default:
                     return markRaw(InternetEarth);
             }
-        }
-    }
+        },
+    },
 });

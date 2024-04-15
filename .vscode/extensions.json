@@ -1,14 +1,14 @@
 {
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-    "aaron-bond.better-comments",
-    "pranaygp.vscode-css-peek",
-    "usernamehw.errorlens",
-    "christian-kohler.path-intellisense",
-    "bradlc.vscode-tailwindcss",
-    "stivo.tailwind-fold",
-    "gruntfuggly.todo-tree",
-    "dariofuzinato.vue-peek"
-  ]
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "aaron-bond.better-comments",
+        "pranaygp.vscode-css-peek",
+        "usernamehw.errorlens",
+        "christian-kohler.path-intellisense",
+        "bradlc.vscode-tailwindcss",
+        "stivo.tailwind-fold",
+        "gruntfuggly.todo-tree",
+        "dariofuzinato.vue-peek"
+    ]
 }

@@ -8,7 +8,7 @@ export default defineConfig({
         // https://vitepress.dev/reference/default-theme-config
         nav: [
             { text: 'Home', link: '/' },
-            { text: 'Examples', link: '/markdown-examples' }
+            { text: 'Examples', link: '/markdown-examples' },
         ],
 
         logo: '../src/assets/imgs/Logo.svg',
@@ -16,18 +16,18 @@ export default defineConfig({
         sidebar: [
             {
                 text: '✨ Getting Started',
-                items: [{ text: 'Installation', link: '/installation' }]
+                items: [{ text: 'Installation', link: '/installation' }],
             },
             {
                 text: '💻 Further Development',
-                items: [{ text: 'Contributing', link: '/CONTRIBUTING' }]
-            }
+                items: [{ text: 'Contributing', link: '/CONTRIBUTING' }],
+            },
         ],
 
         // outline: {
         //     level: 'deep'
         // },
-        socialLinks: [{ icon: 'github', link: 'https://github.com/khateeboveskey/mersal-crms' }]
+        socialLinks: [{ icon: 'github', link: 'https://github.com/khateeboveskey/mersal-crms' }],
     },
-    head: [['link', { rel: 'icon', href: '../src/assets/imgs/Logo.svg' }]]
+    head: [['link', { rel: 'icon', href: '../src/assets/imgs/Logo.svg' }]],
 });

@@ -28,19 +28,19 @@ To get started with contributing, follow these steps:
 
 Please adhere to the following guidelines when writing code:
 
-- You should already be following [Vue Style Guide](https://vuejs.org/style-guide/).
-- Write clear and descriptive comments where necessary.
-- Use meaningful variable and function names.
-- Keep your code clean, organized, and easy to understand.
+-   You should already be following [Vue Style Guide](https://vuejs.org/style-guide/).
+-   Write clear and descriptive comments where necessary.
+-   Use meaningful variable and function names.
+-   Keep your code clean, organized, and easy to understand.
 
 ## Bug Reporting
 
 When reporting bugs, please provide as much detail as possible, including:
 
-- Steps to reproduce the bug.
-- Expected behavior.
-- Actual behavior.
-- Any error messages or logs.
+-   Steps to reproduce the bug.
+-   Expected behavior.
+-   Actual behavior.
+-   Any error messages or logs.
 
 ## Commit Message
 

@@ -23,8 +23,10 @@ export default {
 **Output**
 
 ```html
-<a>test</a> // [!code ++]
-<a>test</a> // [!code --]
+<a>test</a>
+// [!code ++]
+<a>test</a>
+// [!code --]
 ```
 
 ## Custom Containers

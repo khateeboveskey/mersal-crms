@@ -11,7 +11,7 @@ import IconSun from './icons/IconSun.vue';
 import IconMoon from './icons/IconMoon.vue';
 import { useDark, useToggle } from '@vueuse/core';
 // #endregion
-    
+
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 </script>

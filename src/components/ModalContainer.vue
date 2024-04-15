@@ -13,10 +13,10 @@
                 leave-active-class="transition duration-200"
                 leave-to-class="opacity-0 scale-90	">
                 <div
-                    class="max-w-screen w-screen rounded-lg bg-white p-10 shadow dark:bg-gray-700 sm:w-auto md:my-5"
+                    class="max-w-screen w-screen rounded-lg bg-white p-10 shadow sm:w-auto md:my-5 dark:bg-gray-700"
                     v-show="props.show">
                     <div
-                        class="mb-3 flex items-center justify-between border-b pb-3 dark:border-gray-600 sm:col-span-2">
+                        class="mb-3 flex items-center justify-between border-b pb-3 sm:col-span-2 dark:border-gray-600">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                             {{ props.title }}
                         </h3>

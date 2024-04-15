@@ -3,30 +3,30 @@
 layout: home
 
 hero:
-  name: "Mersal"
-  text: "CRM System"
-  tagline: An open-source CRM client.
-  image:
-    src: ./src/assets/imgs/Logo.svg
-    alt: Mersal Logo
-  actions:
-    - theme: brand
-      text: Get Started
-      link: /installation
-    - theme: alt
-      text: API Reference
-      link: /api-reference
+    name: 'Mersal'
+    text: 'CRM System'
+    tagline: An open-source CRM client.
+    image:
+        src: ./src/assets/imgs/Logo.svg
+        alt: Mersal Logo
+    actions:
+        - theme: brand
+          text: Get Started
+          link: /installation
+        - theme: alt
+          text: API Reference
+          link: /api-reference
 
 features:
-  - icon: ✨
-    title: Light Weight
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - icon: 💻
-    title: Open-source
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - icon: 🎨
-    title: Fully-customizable
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    - icon: ✨
+      title: Light Weight
+      details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    - icon: 💻
+      title: Open-source
+      details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    - icon: 🎨
+      title: Fully-customizable
+      details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
 <script setup>
