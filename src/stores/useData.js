@@ -19,14 +19,18 @@ export const useData = defineStore('data', {
          */
         async post(endpoint, data) {
             try {
-                const res = await axios.post(
-                    `${import.meta.env.VITE_APP_API_URL}${endpoint}`,
-                    JSON.stringify(data),
-                );
-                this.get(endpoint, true);
+                const res = await axios.post(endpoint, JSON.stringify(data), {
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                });
+                if (endpoint !== '/login') {
+                    this.get(endpoint, true);
+                }
                 return res.data;
             } catch (error) {
-                console.error(`Error in ${endpoint} POST: ${error}`);
+                console.error(error);
             }
         },
         /**
@@ -37,21 +41,28 @@ export const useData = defineStore('data', {
          * @returns {Promise<any>} The response data from the GET request.
          */
         async get(endpoint, requestData = false) {
+            // slice(1) to delete the leading '/'
             const noSlashEndpoint = endpoint.slice(1);
-            if (requestData) {
-                try {
-                    const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}${endpoint}`);
-                    // slice(1) to delete the leading '/'
-                    this[noSlashEndpoint] = res.data;
-                    return this[noSlashEndpoint];
-                } catch (error) {
-                    console.error(`Error in ${endpoint} GET: ${error}`);
-                }
-            } else {
+            if (!requestData) {
                 if (this[noSlashEndpoint].length) {
                     return this[noSlashEndpoint];
                 } else {
                     return this.get(endpoint, true);
+                }
+            } else {
+                try {
+                    const res = await axios.get(endpoint, {
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${localStorage.getItem('AUTH_TOKEN')}`,
+                            common: {},
+                        },
+                    });
+                    this[noSlashEndpoint] = res.data.data;
+                    return this[noSlashEndpoint];
+                } catch (error) {
+                    console.log(error.data);
                 }
             }
         },
@@ -64,9 +75,7 @@ export const useData = defineStore('data', {
          */
         async delete(endpoint, id) {
             try {
-                const res = await axios.delete(
-                    `${import.meta.env.VITE_APP_API_URL}${endpoint}/${id}`,
-                );
+                const res = await axios.delete(`${endpoint}/${id}`);
                 this.get(endpoint, true);
                 return res.data;
             } catch (error) {

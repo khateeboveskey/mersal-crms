@@ -5,6 +5,7 @@ import DealsView from '@/views/DealsView.vue';
 import InterestsView from '@/views/InterestsView.vue';
 import TagsView from '@/views/TagsView.vue';
 import LocationsView from '@/views/LocationsView.vue';
+import LoginView from '@/views/LoginView.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,6 +56,14 @@ const router = createRouter({
             component: InterestsView,
             meta: {
                 title: `${import.meta.env.VITE_APP_TITLE} - الاهتمامات`,
+            },
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: LoginView,
+            meta: {
+                title: `${import.meta.env.VITE_APP_TITLE} - تسجيل الدخول`,
             },
         },
     ],

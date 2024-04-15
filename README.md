@@ -1,22 +1,16 @@
 # 📧 Mersal CRM Client
 
-Mersal Customer Relationship Management System API Client
+This is an API Client for [CRM-REST-API](https://github.com/Mahmood-Ahmed-Alqirshy/CRM-REST-API)
 
-## Recommended IDE Setup
+## 💻 Project Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+1. Install project dependencies
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+2. Compile and Hot-Reload for Development
 
 ```sh
 npm run dev
