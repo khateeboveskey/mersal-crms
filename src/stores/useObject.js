@@ -3,12 +3,10 @@ import { defineStore } from 'pinia';
 export const useObject = defineStore('object', {
     actions: {
         /**
-         * Returns a new object with only the non-empty properties from the input object
-         * and removes circular references.
+         * Recursively removes null, undefined, and empty string values from an object or array.
          *
-         * @param {Object} obj - The input object to filter.
-         * @returns {Object} A new object with only the non-empty properties from the input object
-         *                   and without circular references.
+         * @param {Object|Array} obj - The object or array to clean.
+         * @returns {Object|Array} - A new object or array with null, undefined, and empty string values removed.
          */
         getOnlyFilled(obj) {
             const seen = new WeakSet();
@@ -25,7 +23,15 @@ export const useObject = defineStore('object', {
                     if (Object.prototype.hasOwnProperty.call(obj, key)) {
                         const value = obj[key];
                         if (typeof value === 'object' && value !== null) {
-                            cleanedObj[key] = clean(value);
+                            const cleanedValue = clean(value);
+                            if (
+                                cleanedValue !== undefined &&
+                                cleanedValue !== null &&
+                                (typeof cleanedValue !== 'object' ||
+                                    Object.keys(cleanedValue).length > 0)
+                            ) {
+                                cleanedObj[key] = cleanedValue;
+                            }
                         } else if (value !== undefined && value !== null && value !== '') {
                             cleanedObj[key] = value;
                         }
@@ -34,6 +40,22 @@ export const useObject = defineStore('object', {
                 return cleanedObj;
             }
             return clean(obj);
+        },
+        parseNested(str) {
+            try {
+                return JSON.parse(str, (_, val) => {
+                    if (typeof val === 'string') {
+                        if (val.startsWith('{') && val.endsWith('}')) {
+                            return parseNested(val);
+                        } else {
+                            return val;
+                        }
+                    }
+                    return val;
+                });
+            } catch (exc) {
+                return str;
+            }
         },
     },
 });

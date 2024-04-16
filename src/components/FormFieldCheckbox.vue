@@ -23,15 +23,15 @@ import RemoveX from './icons/RemoveX.vue';
 const emit = defineEmits(['sendDataToParent']);
 
 const interests = ref([]);
-const checkedInterestsIds = ref([]);
+const checkedinterest_ids = ref([]);
 
 function pushId(event, interestId) {
     if (event.target.checked) {
-        checkedInterestsIds.value.push(interestId);
+        checkedinterest_ids.value.push(interestId.toString());
     } else {
-        checkedInterestsIds.value.splice(checkedInterestsIds.value.indexOf(interestId), 1);
+        checkedinterest_ids.value.splice(checkedinterest_ids.value.indexOf(interestId), 1);
     }
-    emit('sendDataToParent', checkedInterestsIds.value);
+    emit('sendDataToParent', checkedinterest_ids.value);
 }
 
 import { useData } from '@/stores/useData';

@@ -40,26 +40,27 @@
                             </a>
                         </div>
                     </td>
-                    <td class="px-6 py-4">{{ contact.phoneNo }}</td>
+                    <td class="px-6 py-4">{{ contact.phone }}</td>
                     <td class="px-6 py-4">
                         <div class="flex items-center">
                             <a
-                                v-for="socialMediaLink in contact.socialMediaLinks"
-                                :key="socialMediaLink"
+                                v-for="smLink in obj.parseNested(contact.social_media_links)"
+                                :key="smLink"
                                 target="_blank"
                                 class="rounded-lg p-2 text-slate-400 hover:bg-gray-100 dark:text-slate-500 dark:hover:bg-gray-700"
-                                :href="socialMediaLink">
+                                :href="smLink">
                                 <component
                                     class="h-5 w-5"
-                                    :is="changeSocialMediaIcon(socialMediaLink)"></component>
+                                    :is="changeSocialMediaIcon(smLink)"></component>
                             </a>
                         </div>
                     </td>
-                    <td class="px-6 py-4">{{ contact.birthDate }}</td>
-                    <td class="px-6 py-4">{{ getLocationNameFromId(contact.addressId) }}</td>
+                    <td class="px-6 py-4">{{ contact.birth_date }}</td>
+                    <td class="px-6 py-4">{{ getLocationNameFromId(contact.location_id) }}</td>
                     <td class="px-6 py-4">
+                        {{ contact.interest_ids }}
                         <span
-                            v-for="interestId in contact.interestsIds"
+                            v-for="interestId in contact.interest_ids"
                             :key="interestId"
                             class="mb-1 me-1 inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-900 dark:text-gray-300">
                             {{ getInterestNameFromId(interestId) }}
@@ -111,10 +112,12 @@ import IconPenEdit from '@/components/icons/IconPenEdit.vue';
 import { useUrl } from '@/stores/useUrl';
 import { useIcon } from '@/stores/useIcon';
 import { useData } from '@/stores/useData';
+import { useObject } from '@/stores/useObject';
 
 const urlRegex = useUrl();
 const icon = useIcon();
 const request = useData();
+const obj = useObject();
 
 // Vue's
 import { onMounted, ref, computed, watch } from 'vue';
@@ -141,11 +144,11 @@ const searchResult = computed(() => {
     return contacts.value.filter(
         (c) =>
             (c.name && c.name.includes(props.searchValue)) ||
-            (c.phoneNo && c.phoneNo.toString().includes(props.searchValue)) ||
+            (c.phone && c.phone.toString().includes(props.searchValue)) ||
             (c.email && c.email.includes(props.searchValue)) ||
             (c.address && c.address.includes(props.searchValue)) ||
             (c.interests && c.interests.join('، ').includes(props.searchValue)) ||
-            (c.birthDate && c.birthDate.includes(props.searchValue)),
+            (c.birth_date && c.birth_date.includes(props.searchValue)),
     );
 });
 

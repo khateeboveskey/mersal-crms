@@ -1,6 +1,22 @@
 import { defineStore } from 'pinia';
 import axios from 'redaxios';
 
+/**
+ * this should not be here, this should be as
+ * axios.defaults.headers['Accept'] = 'application/json';
+ * axios.defaults.headers.post['Content-Type'] = 'application/json';
+ * axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+ * in @/src/main.js but redaxios it does not override axios's defaults
+ */
+// todo: fix redaxios does not override axios's defaults
+const REQUEST_OPTIONS = {
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('AUTH_TOKEN')}`,
+    },
+};
+
 export const useData = defineStore('data', {
     state: () => {
         return {
@@ -19,18 +35,13 @@ export const useData = defineStore('data', {
          */
         async post(endpoint, data) {
             try {
-                const res = await axios.post(endpoint, JSON.stringify(data), {
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                });
+                const res = await axios.post(endpoint, JSON.stringify(data), REQUEST_OPTIONS);
                 if (endpoint !== '/login') {
                     this.get(endpoint, true);
                 }
                 return res.data;
             } catch (error) {
-                console.error(error);
+                console.error(error.data);
             }
         },
         /**
@@ -51,14 +62,7 @@ export const useData = defineStore('data', {
                 }
             } else {
                 try {
-                    const res = await axios.get(endpoint, {
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${localStorage.getItem('AUTH_TOKEN')}`,
-                            common: {},
-                        },
-                    });
+                    const res = await axios.get(endpoint, REQUEST_OPTIONS);
                     this[noSlashEndpoint] = res.data.data;
                     return this[noSlashEndpoint];
                 } catch (error) {
@@ -75,7 +79,7 @@ export const useData = defineStore('data', {
          */
         async delete(endpoint, id) {
             try {
-                const res = await axios.delete(`${endpoint}/${id}`);
+                const res = await axios.delete(`${endpoint}/${id}`, REQUEST_OPTIONS);
                 this.get(endpoint, true);
                 return res.data;
             } catch (error) {

@@ -10,17 +10,6 @@ import axios from 'redaxios';
 // #endregion imports
 
 axios.defaults.baseURL = import.meta.env.VITE_APP_API_URL;
-axios.defaults = {
-    headers: {
-        Accept: 'application/json',
-        common: {
-            Authorization: `Bearer ${localStorage.getItem('AUTH_TOKEN')}`,
-        },
-        post: {
-            'Content-Type': 'application/json',
-        },
-    },
-};
 
 router.beforeEach((to, from, next) => {
     const isAuthenticated = !!localStorage.getItem('AUTH_TOKEN');

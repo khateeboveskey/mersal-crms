@@ -39,7 +39,6 @@ const selectedOptionId = computed(() => {
 });
 
 watch(selectedOption, () => {
-    // todo: make Id as Number
-    emit('sendDataToParent', selectedOptionId.value);
+    emit('sendDataToParent', selectedOptionId.value.toString());
 });
 </script>

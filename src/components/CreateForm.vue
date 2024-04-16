@@ -1,5 +1,5 @@
 <template>
-    <form @submit="sendData">
+    <form @submit.prevent="sendData">
         <div class="relative grid max-h-full w-full max-w-md gap-4 sm:w-[28rem] sm:grid-cols-2">
             <div class="mb-2 block text-sm font-medium text-gray-400 sm:col-span-2">
                 تشير علامة الـ
@@ -7,7 +7,7 @@
                 على أن الحقل إجباري
             </div>
             <FormField label="الاسم" v-model="data.name" required type="text" />
-            <FormField label="رقم الهاتف" v-model="data.phoneNo" required type="number" />
+            <FormField label="رقم الهاتف" v-model="data.phone" required type="number" />
             <FormField
                 class="sm:col-span-2"
                 dir="ltr"
@@ -15,22 +15,22 @@
                 v-model="data.email"
                 required
                 type="email" />
-            <FormField label="تاريخ الميلاد" v-model="data.birthDate" type="date" />
+            <FormField label="تاريخ الميلاد" v-model="data.birth_date" type="date" />
             <FormField
                 label="العنوان"
                 :options-source="request.locations"
-                @send-data-to-grand-parent="(optionId) => (data.addressId = optionId)"
+                @send-data-to-grand-parent="(optionId) => (data.location_id = optionId)"
                 type="FormFieldSelect" />
             <FormField
                 class="sm:col-span-2"
                 label="روابط حسابات وسائل التواصل"
                 type="FormFieldUrl"
-                @send-data-to-grand-parent="(dataObj) => (data.socialMediaLinks = dataObj)" />
+                @send-data-to-grand-parent="(dataObj) => (data.social_media_links = dataObj)" />
             <FormField
                 class="sm:col-span-2"
                 label="الاهتمامات"
                 type="FormFieldCheckbox"
-                @send-data-to-grand-parent="(dataArr) => (data.interestsIds = dataArr)" />
+                @send-data-to-grand-parent="(dataArr) => (data.interest_ids = dataArr)" />
             <div class="mt-5 flex items-center justify-end sm:col-span-2">
                 <button
                     type="submit"
@@ -53,7 +53,6 @@ import CreatePlus from './icons/CreatePlus.vue';
 
 // Stores
 import { useObject } from '@/stores/useObject';
-import { useDateFormat } from '@vueuse/core';
 import { useData } from '@/stores/useData';
 
 const request = useData();
@@ -62,19 +61,17 @@ const obj = useObject();
 const locations = ref([]);
 const data = reactive({
     name: '',
-    phoneNo: '',
+    phone: '',
     email: '',
-    addressId: '',
-    socialMediaLinks: {},
-    interestsIds: [],
-    birthDate: '',
+    location_id: '',
+    social_media_links: {},
+    interest_ids: [],
+    birth_date: '',
 });
 
 async function sendData() {
-    const cleanData = obj.getOnlyFilled({
-        ...data,
-        birthDate: useDateFormat(data.birthDate, 'YYYY-M-D').value,
-    });
+    const cleanData = obj.getOnlyFilled({ ...data, phone: data.phone.toString() });
+    console.log(cleanData);
     request.post('/contacts', cleanData);
 }
 

@@ -12,7 +12,7 @@
                 <input
                     :id="props.id"
                     :required="props.required"
-                    v-model="socialMediaLinks[index]"
+                    v-model="social_media_links[index]"
                     @input="
                         changeSocialMediaIcon($event, index);
                         sendDataToParent();
@@ -53,12 +53,12 @@ function changeSocialMediaIcon(event, index) {
     socialMediaIcons[index].value = icon.getSocialMediaIconComponent(socialMediaName);
 }
 
-const socialMediaLinks = reactive([]);
+const social_media_links = reactive([]);
 let socialMediaObject = reactive({});
 
-watch(socialMediaLinks, () => {
+watch(social_media_links, () => {
     socialMediaObject = {};
-    socialMediaLinks.forEach((url) => {
+    social_media_links.forEach((url) => {
         if (url !== '') {
             if (urlRegex.extractWebsiteName(url) === '') {
                 socialMediaObject[url] = url;
