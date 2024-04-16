@@ -20,9 +20,10 @@ const REQUEST_OPTIONS = {
 export const useData = defineStore('data', {
     state: () => {
         return {
-            locations: [],
-            interests: [],
             contacts: [],
+            locations: [],
+            tags: [],
+            interests: [],
         };
     },
     actions: {

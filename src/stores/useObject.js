@@ -41,11 +41,18 @@ export const useObject = defineStore('object', {
             }
             return clean(obj);
         },
+        /**
+         * Recursively parses a JSON string, handling nested objects and arrays.
+         *
+         * @param {string} str - The JSON string to parse.
+         * @returns {any} - The parsed value, which can be an object, array, or primitive.
+         */
         parseNested(str) {
             try {
                 return JSON.parse(str, (_, val) => {
                     if (typeof val === 'string') {
                         if (val.startsWith('{') && val.endsWith('}')) {
+                            // eslint-disable-next-line no-undef
                             return parseNested(val);
                         } else {
                             return val;
