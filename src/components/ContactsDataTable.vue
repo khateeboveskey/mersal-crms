@@ -58,7 +58,6 @@
                     <td class="px-6 py-4">{{ contact.birth_date }}</td>
                     <td class="px-6 py-4">{{ getLocationNameFromId(contact.location_id) }}</td>
                     <td class="px-6 py-4">
-                        {{ contact.interest_ids }}
                         <span
                             v-for="interestId in contact.interest_ids"
                             :key="interestId"
@@ -147,8 +146,9 @@ const searchResult = computed(() => {
             (c.phone && c.phone.toString().includes(props.searchValue)) ||
             (c.email && c.email.includes(props.searchValue)) ||
             (c.address && c.address.includes(props.searchValue)) ||
-            (c.interests && c.interests.join('، ').includes(props.searchValue)) ||
-            (c.birth_date && c.birth_date.includes(props.searchValue)),
+            (c.birth_date && c.birth_date.includes(props.searchValue))
+        // todo: make search by interests possible
+        // (c.interests && c.interests.join('، ').includes(props.searchValue)) ||
     );
 });
 

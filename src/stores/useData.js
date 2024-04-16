@@ -21,6 +21,7 @@ export const useData = defineStore('data', {
     state: () => {
         return {
             contacts: [],
+            deals: [],
             locations: [],
             tags: [],
             interests: [],

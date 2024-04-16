@@ -70,6 +70,6 @@ watch(social_media_links, () => {
 });
 
 function sendDataToParent() {
-    emit('sendDataToParent', obj.getOnlyFilled(socialMediaObject));
+    emit('sendDataToParent', JSON.stringify(obj.getOnlyFilled(socialMediaObject)));
 }
 </script>

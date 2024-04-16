@@ -7,7 +7,7 @@
             type="search"
             id="default-search"
             class="block w-full rounded-lg border border-gray-300 bg-gray-50 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-            placeholder="ابحث عن جهات الاتصال بالاسم، الرقم، الموقع ... إلخ"
+            :placeholder="props.placeholder"
             v-model="searchValue" />
     </div>
 </template>
@@ -15,5 +15,8 @@
 <script setup>
 import SearchLens from './icons/SearchLens.vue';
 
+const props = defineProps({
+    placeholder: String,
+});
 const searchValue = defineModel();
 </script>

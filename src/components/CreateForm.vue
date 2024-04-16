@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="sendData">
+    <form @submit="sendData">
         <div class="relative grid max-h-full w-full max-w-md gap-4 sm:w-[28rem] sm:grid-cols-2">
             <div class="mb-2 block text-sm font-medium text-gray-400 sm:col-span-2">
                 تشير علامة الـ

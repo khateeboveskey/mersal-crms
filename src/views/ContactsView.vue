@@ -1,7 +1,9 @@
 <template>
     <div class="bg-gray-100 dark:bg-slate-950">
         <section class="mb-5 flex w-full flex-row justify-between gap-5">
-            <SearchBar v-model="searchValue" />
+            <SearchBar
+                placeholder="ابحث عن جهات الاتصال بالاسم، الرقم، الموقع ... إلخ"
+                v-model="searchValue" />
             <button
                 @click="showCreateModal = true"
                 class="flex flex-row items-center gap-1 rounded-lg bg-primary-700 px-4 text-white transition duration-200 hover:bg-primary-800">
@@ -9,7 +11,7 @@
                 <span class="hidden md:block">إضافة جهة اتصال</span>
             </button>
         </section>
-        <DataTable :search-value="searchValue" />
+        <ContactsDataTable :search-value="searchValue" />
         <ModalContainer
             title="إضافة جهة اتصال جديدة"
             @hide-modal="showCreateModal = false"
@@ -30,7 +32,7 @@ import { ref } from 'vue';
 let showCreateModal = ref(false);
 
 // Components
-import DataTable from '@/components/DataTable.vue';
+import ContactsDataTable from '@/components/ContactsDataTable.vue';
 import SearchBar from '@/components/SearchBar.vue';
 
 let searchValue = ref(null);
