@@ -49,6 +49,6 @@
 
 @layer components {
     .required {
-        @apply after:ml-0.5 after:text-red-500 after:content-['*'] dark:after:text-red-500;
+        @apply after:ms-1 after:text-red-500 after:content-['*'] dark:after:text-red-500;
     }
 }

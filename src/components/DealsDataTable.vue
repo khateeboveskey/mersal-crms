@@ -42,7 +42,7 @@
                             {{ new Date(deal.datetime).toLocaleDateString() }}
                         </time>
                     </td>
-                    <td v-if="deal.is_annual" class="px-6 py-4"><IconTick /></td>
+                    <td class="px-6 py-4"><IconTick v-if="deal.is_annual" /></td>
                     <td class="px-6 py-4">
                         <span
                             v-for="tagId in deal.tag_ids"

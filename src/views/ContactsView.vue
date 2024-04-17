@@ -17,14 +17,14 @@
             @hide-modal="showCreateModal = false"
             v-show="showCreateModal"
             :show="showCreateModal">
-            <CreateForm />
+            <ContactsCreateForm />
         </ModalContainer>
     </div>
 </template>
 
 <script setup>
 import ModalContainer from '@/components/ModalContainer.vue';
-import CreateForm from '@/components/CreateForm.vue';
+import ContactsCreateForm from '@/components/ContactsCreateForm.vue';
 import CreatePlus from '@/components/icons/CreatePlus.vue';
 
 import { ref } from 'vue';

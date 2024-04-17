@@ -46,6 +46,7 @@
 <script setup>
 // Vue's
 import { reactive, onMounted, ref } from 'vue';
+import { initFlowbite } from 'flowbite';
 
 // Components
 import FormField from './FormField.vue';
@@ -74,6 +75,10 @@ async function sendData() {
     console.log(cleanData);
     request.post('/contacts', cleanData);
 }
+
+onMounted(() => {
+    initFlowbite();
+});
 
 onMounted(async () => {
     locations.value = await request.get('/locations');
