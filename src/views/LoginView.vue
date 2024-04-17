@@ -1,7 +1,7 @@
 <template>
-    <section class="grid place-items-center bg-gray-50 dark:bg-gray-900">
-        <div class="mx-auto flex w-96 flex-col items-center justify-center">
-            <BrandIdentity class="text-4xl">
+    <section class="grid place-items-center bg-gray-50 p-0 dark:bg-gray-900">
+        <div class="flex w-screen flex-col items-center p-4 justify-center sm:w-96">
+            <BrandIdentity class="!flex text-4xl">
                 <template #logo>
                     <MersalLogo class="me-2 w-12" />
                 </template>

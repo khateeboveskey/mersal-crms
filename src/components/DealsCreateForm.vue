@@ -23,7 +23,8 @@
                 label="موعد الإرسال"
                 v-model="data.datetime"
                 type="datetime-local" />
-            <div class="flex items-center gap-3 text-white sm:col-span-2">
+            <div
+                class="mb-2 flex select-none items-center gap-3 text-sm font-medium text-gray-900 sm:col-span-2 dark:text-white">
                 <input
                     class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
                     type="checkbox"

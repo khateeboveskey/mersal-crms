@@ -30,6 +30,7 @@
                 class="sm:col-span-2"
                 label="الاهتمامات"
                 type="FormFieldCheckbox"
+                list="/interests"
                 @send-data-to-grand-parent="(dataArr) => (data.interest_ids = dataArr)" />
             <div class="mt-5 flex items-center justify-end sm:col-span-2">
                 <button
