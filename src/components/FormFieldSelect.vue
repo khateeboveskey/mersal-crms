@@ -33,7 +33,7 @@ const selectedOption = ref('قم باختيار العنوان');
 const selectedOptionId = computed(() => {
     if (!selectedOption.value) return '';
     const selectedOptionObject = props.optionsSource.find(
-        (obj) => obj.name === selectedOption.value,
+        (obj) => obj.name === selectedOption.value
     );
     return selectedOptionObject?.id;
 });
