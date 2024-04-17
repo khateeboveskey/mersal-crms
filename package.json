@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@vueuse/core": "^10.9.0",
+        "apexcharts": "^3.48.0",
         "flowbite": "^2.3.0",
         "pinia": "^2.1.7",
         "redaxios": "^0.5.1",

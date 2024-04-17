@@ -22,6 +22,10 @@ export default {
     extends: {
         colors: colors,
     },
-    // eslint-disable-next-line no-undef
-    plugins: [require('flowbite/plugin')],
+    plugins: [
+        // eslint-disable-next-line no-undef
+        require('flowbite/plugin')({
+            charts: true,
+        }),
+    ],
 };

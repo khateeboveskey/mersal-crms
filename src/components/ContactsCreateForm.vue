@@ -1,5 +1,5 @@
 <template>
-    <form @submit="sendData">
+    <form @submit.prevent="sendData">
         <div class="relative grid max-h-full w-full max-w-md gap-4 sm:w-[28rem] sm:grid-cols-2">
             <div class="mb-2 block text-sm font-medium text-gray-400 sm:col-span-2">
                 تشير علامة الـ
@@ -74,7 +74,10 @@ const data = reactive({
 async function sendData() {
     const cleanData = obj.getOnlyFilled({ ...data, phone: data.phone.toString() });
     console.log(cleanData);
-    request.post('/contacts', cleanData);
+    const res = await request.post('/contacts', cleanData);
+    if (!res.error) {
+        location.reload();
+    }
 }
 
 onMounted(() => {
