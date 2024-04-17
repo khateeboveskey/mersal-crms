@@ -15,6 +15,12 @@ router.beforeEach((to, from, next) => {
     const isAuthenticated = !!localStorage.getItem('AUTH_TOKEN');
     if (to.name !== 'login' && !isAuthenticated) {
         next({ name: 'login' }); // Redirect to the login page if not logged in
+        /**
+         * this hides sidebar in home becaude of v-if="!isInLogin" in App.vue
+         */
+        // todo: fix that sidebar hides in redirected home
+        // } else if (to.name === 'login' && isAuthenticated) {
+        //     next({ name: 'home' });
     } else {
         // Update the title
         if (to.meta.title) {

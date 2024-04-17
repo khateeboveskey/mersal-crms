@@ -27,6 +27,13 @@
         }
     }
 
+    /* input:-internal-autofill-selected {
+        appearance: menulist-button;
+        background-image: none !important;
+        background-color: red !important;
+        color: fieldtext !important;
+    } */
+
     /* Development diagnosis purposes */
     /* * {
     border: 2px solid red;

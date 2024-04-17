@@ -1,9 +1,9 @@
 <template>
-    <section class="bg-gray-50 dark:bg-gray-900">
-        <div class="mx-auto flex flex-col items-center justify-center py-8 md:h-screen lg:py-0">
-            <BrandIdentity>
+    <section class="grid place-items-center bg-gray-50 dark:bg-gray-900">
+        <div class="mx-auto flex w-96 flex-col items-center justify-center">
+            <BrandIdentity class="text-4xl">
                 <template #logo>
-                    <MersalLogo class="me-2 w-11" />
+                    <MersalLogo class="me-2 w-12" />
                 </template>
                 <template #name>مِرسال</template>
             </BrandIdentity>
@@ -22,7 +22,7 @@
                                 type="username"
                                 name="username"
                                 id="username"
-                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:ring-primary-600 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-600 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                                 required />
                         </div>
                         <div>
