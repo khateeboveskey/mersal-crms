@@ -26,7 +26,7 @@
                                     إلغاء
                                 </button>
                                 <button
-                                    @click="deleteContact"
+                                    @click="deleteItem"
                                     type="button"
                                     class="inline-flex items-center rounded-lg bg-red-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400 dark:focus:ring-red-400">
                                     <IconDeleteTrash class="me-2 h-5 w-5 text-white" />
@@ -51,13 +51,20 @@ const props = defineProps({
     contactId: {
         type: String,
     },
+    dealId: {
+        type: String,
+    },
 });
 
 const emit = defineEmits(['hideModal', 'hideFromList']);
 
-function deleteContact() {
-    request.delete('/contacts', props.contactId);
+function deleteItem() {
+    props.contactId
+        ? request.delete('/contacts', props.contactId)
+        : props.dealId
+          ? request.delete('/deals', props.dealId)
+          : '';
     emit('hideModal');
-    emit('hideFromList', props.contactId);
+    emit('hideFromList', props.contactId | props.dealId);
 }
 </script>
