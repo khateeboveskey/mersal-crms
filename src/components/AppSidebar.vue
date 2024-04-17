@@ -45,6 +45,7 @@
 <script setup>
 // #region imports
 // Vue's
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
 import BrandIdentity from './BrandIdentity.vue';
@@ -62,7 +63,11 @@ import IconTag from './icons/IconTag.vue';
 import IconLove from './icons/IconLove.vue';
 
 import MersalLogo from '@/assets/imgs/MersalLogo.vue';
+import IconLogoutDoor from './icons/IconLogoutDoor.vue';
+import IconLoginDoor from './icons/IconLoginDoor.vue';
 // #endregion
+
+const isAuthenticated = ref(localStorage.getItem('AUTH_TOKEN') !== null);
 
 // Data
 const tabGroups = [
@@ -74,30 +79,37 @@ const tabGroups = [
         },
         {
             title: 'جهات الاتصال',
-            route: '/contacts',
+            route: 'contacts',
             icon: IconUser,
         },
         {
             title: 'العروض',
-            route: '/deals',
+            route: 'deals',
             icon: IconPrecentageCircle,
         },
     ],
     [
         {
             title: 'العناوين',
-            route: '/locations',
+            route: 'locations',
             icon: IconLocation,
         },
         {
             title: 'الوسوم',
-            route: '/tags',
+            route: 'tags',
             icon: IconTag,
         },
         {
             title: 'الاهتمامات',
-            route: '/interests',
+            route: 'interests',
             icon: IconLove,
+        },
+    ],
+    [
+        {
+            title: isAuthenticated.value ? 'تسجيل الخروج' : 'تسجيل الدخول',
+            route: isAuthenticated.value ? 'logout' : 'login',
+            icon: isAuthenticated.value ? IconLogoutDoor : IconLoginDoor,
         },
     ],
 ];

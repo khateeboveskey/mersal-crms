@@ -1,16 +1,10 @@
 <template>
-    <section class="grid place-items-center bg-gray-50 p-0 dark:bg-gray-900">
+    <section class="grid place-items-center bg-gray-50 p-0 dark:bg-gray-950">
         <div class="flex w-screen flex-col items-center justify-center p-4 sm:w-96">
-            <BrandIdentity class="!flex text-4xl">
-                <template #logo>
-                    <MersalLogo class="me-2 w-12" />
-                </template>
-                <template #name>مِرسال</template>
-            </BrandIdentity>
             <div
                 class="w-full rounded-lg bg-white shadow sm:max-w-md md:mt-0 xl:p-0 dark:border dark:border-gray-700 dark:bg-gray-800">
                 <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
-                    <form class="space-y-4 md:space-y-6" @submit="login">
+                    <form class="space-y-4 md:space-y-6" @submit.prevent="login">
                         <div>
                             <label
                                 for="username"
@@ -74,9 +68,6 @@
 </template>
 
 <script setup>
-import BrandIdentity from '@/components/BrandIdentity.vue';
-import MersalLogo from '@/assets/imgs/MersalLogo.vue';
-
 import { useData } from '@/stores/useData';
 import { reactive, ref } from 'vue';
 const request = useData();
@@ -92,5 +83,6 @@ async function login() {
     const resData = await request.post('/login', credentials);
     const AUTH_TOKEN = resData.token;
     localStorage.setItem('AUTH_TOKEN', AUTH_TOKEN);
+    location.reload();
 }
 </script>

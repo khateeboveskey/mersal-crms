@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col flex-nowrap overflow-x-hidden md:flex-row">
-        <AppSidebar v-if="!isInLogin" />
+        <AppSidebar />
         <RouterView
             class="no-scrollbar md:after:content[''] h-screen w-full overflow-y-scroll p-10 md:after:absolute md:after:right-0 md:after:top-0 md:after:-z-10 md:after:h-[-webkit-fill-available] md:after:w-[inherit] md:after:bg-inherit" />
     </div>
@@ -8,5 +8,5 @@
 <script setup>
 import { RouterView } from 'vue-router';
 import AppSidebar from './components/AppSidebar.vue';
-const isInLogin = location.href.includes('/login');
+// const isInLogin = location.href.includes('/login');
 </script>
