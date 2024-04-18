@@ -61,6 +61,8 @@ const request = useData();
 const obj = useObject();
 
 const locations = ref([]);
+const interests = ref([]);
+
 const data = reactive({
     name: '',
     phone: '',
@@ -86,5 +88,6 @@ onMounted(() => {
 
 onMounted(async () => {
     locations.value = await request.get('/locations');
+    interests.value = await request.get('/interests');
 });
 </script>
