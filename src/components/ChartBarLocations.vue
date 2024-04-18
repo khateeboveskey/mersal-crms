@@ -114,7 +114,7 @@
 
         <!-- Line Chart -->
         <div v-show="contacts" class="h-fit py-6" id="pie-chart"></div>
-        <div v-show="!contacts">جاري التحميل</div>
+        <div v-show="!contacts">جاري تحميل البيانات...</div>
     </div>
 </template>
 
