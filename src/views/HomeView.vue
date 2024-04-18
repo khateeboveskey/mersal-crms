@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen bg-gray-100 dark:bg-slate-950">
+    <div class="h-auto grid items-start bg-gray-100 dark:bg-slate-950">
         <ChartBarLocations />
     </div>
 </template>

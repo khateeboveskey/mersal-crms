@@ -14,7 +14,7 @@
                 :key="tabGroup">
                 <RouterLink
                     :class="{
-                        'hidden md:flex': index === 1,
+                        'hidden md:flex': index !== 0,
                     }"
                     v-for="tab in tabGroup"
                     :key="tab.route"
