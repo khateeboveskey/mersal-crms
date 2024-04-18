@@ -48,13 +48,13 @@
                 class="sm:col-span-2"
                 label="الوسوم"
                 type="FormFieldCheckbox"
-                list="/tags"
+                :options-source="request.tags"
                 @send-data-to-grand-parent="(dataArr) => (data.tag_ids = dataArr)" />
             <FormField
                 class="sm:col-span-2"
                 label="الاهتمامات المرتبطة بهذا العرض"
                 type="FormFieldCheckbox"
-                list="/interests"
+                :options-source="request.interests"
                 @send-data-to-grand-parent="(dataArr) => (data.interest_ids = dataArr)" />
             <div class="mt-5 flex items-center justify-end sm:col-span-2">
                 <button

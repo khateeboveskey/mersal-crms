@@ -68,7 +68,6 @@ const props = defineProps({
     id: String,
     label: String,
     dir: String,
-    list: String,
     /**
      * optionsSource data comes from
      * ContactsCreateForm.vue -> FormField.vue -> FormFieldSelect.vue

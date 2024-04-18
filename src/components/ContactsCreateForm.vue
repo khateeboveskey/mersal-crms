@@ -30,7 +30,7 @@
                 class="sm:col-span-2"
                 label="الاهتمامات"
                 type="FormFieldCheckbox"
-                list="/interests"
+                :options-source="request.interests"
                 @send-data-to-grand-parent="(dataArr) => (data.interest_ids = dataArr)" />
             <div class="mt-5 flex items-center justify-end sm:col-span-2">
                 <button
@@ -61,6 +61,8 @@ const request = useData();
 const obj = useObject();
 
 const locations = ref([]);
+const interests = ref([]);
+
 const data = reactive({
     name: '',
     phone: '',
@@ -86,5 +88,6 @@ onMounted(() => {
 
 onMounted(async () => {
     locations.value = await request.get('/locations');
+    interests.value = await request.get('/interests');
 });
 </script>
