@@ -2,6 +2,8 @@
 
 This is an API Client for [CRM-REST-API](https://github.com/Mahmood-Ahmed-Alqirshy/CRM-REST-API)
 
+![Cover Image](src/assets/imgs/cover.jpg)
+
 ## 💻 Project Setup
 
 1. Install project dependencies
