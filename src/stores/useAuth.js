@@ -9,11 +9,22 @@ export const useAuth = defineStore('auth', {
         };
     },
     actions: {
+        /**
+         * Logs the user out by making a POST request to the '/logout' endpoint and removing the 'AUTH_TOKEN' from local storage.
+         */
         async logout() {
             const request = useData();
             await request.post('/logout');
             localStorage.removeItem('AUTH_TOKEN');
         },
+        /**
+         * Logs in the user with the provided credentials.
+         *
+         * @param {Object} credentials - The user's login credentials.
+         * @param {string} credentials.username - The user's username.
+         * @param {string} credentials.password - The user's password.
+         * @returns {Promise<Object>} - The response data from the login request. If successful, the response will contain a token that should be stored in localStorage.
+         */
         async login(credentials) {
             const request = useData();
             const resData = await request.post('/login', credentials);

@@ -20,13 +20,6 @@
         @apply [&::-webkit-inner-spin-button]:appearance-none;
     }
 
-    /* todo: make this dynamic */
-    @supports not selector(::-webkit-scrollbar) {
-        * {
-            scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
-        }
-    }
-
     /* Remove autofill force wierd bg color */
     input:-webkit-autofill,
     input:-webkit-autofill:focus {
