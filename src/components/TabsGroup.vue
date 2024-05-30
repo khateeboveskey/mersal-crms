@@ -1,5 +1,6 @@
 <template>
-    <div class="md:mb-5 md:border-b md:border-slate-200 md:pb-5 md:last:border-0 md:dark:border-slate-800">
+    <div
+        class="md:mb-5 md:border-b md:border-slate-200 md:pb-5 md:last:border-0 md:dark:border-slate-800">
         <span v-if="props.title" class="text-slate-00 ms-4 mt-5 hidden md:block">
             {{ props.title }}
         </span>
