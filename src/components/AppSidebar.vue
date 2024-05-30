@@ -45,7 +45,6 @@
 <script setup>
 // #region imports
 // Vue's
-import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
 import BrandIdentity from './BrandIdentity.vue';
@@ -67,7 +66,8 @@ import IconLogoutDoor from './icons/IconLogoutDoor.vue';
 import IconLoginDoor from './icons/IconLoginDoor.vue';
 // #endregion
 
-const isAuthenticated = ref(localStorage.getItem('AUTH_TOKEN') !== null);
+import { useAuth } from '@/stores/useAuth';
+const auth = useAuth();
 
 // Data
 const tabGroups = [
@@ -107,9 +107,9 @@ const tabGroups = [
     ],
     [
         {
-            title: isAuthenticated.value ? 'تسجيل الخروج' : 'تسجيل الدخول',
-            route: isAuthenticated.value ? 'logout' : 'login',
-            icon: isAuthenticated.value ? IconLogoutDoor : IconLoginDoor,
+            title: auth.isAuthenticated ? 'تسجيل الخروج' : 'تسجيل الدخول',
+            route: auth.isAuthenticated ? 'logout' : 'login',
+            icon: auth.isAuthenticated ? IconLogoutDoor : IconLoginDoor,
         },
     ],
 ];
