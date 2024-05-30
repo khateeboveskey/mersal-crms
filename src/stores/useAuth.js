@@ -14,5 +14,16 @@ export const useAuth = defineStore('auth', {
             await request.post('/logout');
             localStorage.removeItem('AUTH_TOKEN');
         },
+        async login(credentials) {
+            const request = useData();
+            const resData = await request.post('/login', credentials);
+            if (!resData.error) {
+                const AUTH_TOKEN = resData.token;
+                localStorage.setItem('AUTH_TOKEN', AUTH_TOKEN);
+                location.reload();
+            } else {
+                return resData;
+            }
+        },
     },
 });

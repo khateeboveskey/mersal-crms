@@ -83,9 +83,9 @@
 </template>
 
 <script setup>
-import { useData } from '@/stores/useData';
+import { useAuth } from '@/stores/useAuth';
 import { reactive, ref } from 'vue';
-const request = useData();
+const auth = useAuth();
 
 const credentials = reactive({
     username: '',
@@ -97,12 +97,8 @@ const rememberMe = ref(false);
 async function login() {
     const submitBtn = document.querySelector('[type="submit"]');
     submitBtn.disabled = true;
-    const resData = await request.post('/login', credentials);
-    if (!resData.error) {
-        const AUTH_TOKEN = resData.token;
-        localStorage.setItem('AUTH_TOKEN', AUTH_TOKEN);
-        location.reload();
-    } else {
+    const res = await auth.login(credentials);
+    if (res.error) {
         submitBtn.disabled = false;
     }
 }
