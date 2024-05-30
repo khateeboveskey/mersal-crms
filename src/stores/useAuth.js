@@ -16,6 +16,7 @@ export const useAuth = defineStore('auth', {
             const request = useData();
             await request.post('/logout');
             localStorage.removeItem('AUTH_TOKEN');
+            location.reload();
         },
         /**
          * Logs in the user with the provided credentials.

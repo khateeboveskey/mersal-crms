@@ -66,10 +66,6 @@ const router = createRouter({
                 title: `${import.meta.env.VITE_APP_TITLE} - تسجيل الدخول`,
             },
         },
-        {
-            path: '/logout',
-            name: 'logout',
-        },
     ],
 });
 

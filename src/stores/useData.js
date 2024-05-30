@@ -38,7 +38,7 @@ export const useData = defineStore('data', {
         async post(endpoint, data) {
             try {
                 const res = await axios.post(endpoint, JSON.stringify(data), REQUEST_OPTIONS);
-                if (endpoint !== '/login') {
+                if (endpoint !== '/login' || endpoint !== '/logout') {
                     this.get(endpoint, true);
                 }
                 return res.data;

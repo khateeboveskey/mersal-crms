@@ -8,10 +8,7 @@
                 </template>
                 <template #name>مِرسال</template>
             </BrandIdentity>
-            <TabsGroup
-                class="md:mb-5 md:border-b md:border-slate-200 md:pb-5 md:last:border-0 md:dark:border-slate-800"
-                v-for="(tabGroup, index) in tabGroups"
-                :key="tabGroup">
+            <TabsGroup v-for="(tabGroup, index) in getRoutes" :key="tabGroup">
                 <RouterLink
                     :class="{
                         'hidden md:flex': index !== 0,
@@ -25,6 +22,15 @@
                         <component :is="tab.icon"></component>
                     </TabItem>
                 </RouterLink>
+            </TabsGroup>
+            <TabsGroup>
+                <button
+                    @click="auth.logout()"
+                    class="rounded-lg text-gray-800 hover:bg-gray-100 dark:text-slate-300 dark:hover:bg-slate-800">
+                    <TabItem title="تسجيل الخروج">
+                        <IconLogoutDoor />
+                    </TabItem>
+                </button>
             </TabsGroup>
         </section>
         <section class="hidden md:block">
@@ -63,11 +69,10 @@ import IconLove from './icons/IconLove.vue';
 
 import MersalLogo from '@/assets/imgs/MersalLogo.vue';
 import IconLogoutDoor from './icons/IconLogoutDoor.vue';
-import IconLoginDoor from './icons/IconLoginDoor.vue';
-// #endregion
-
+import { computed, onMounted } from 'vue';
 import { useAuth } from '@/stores/useAuth';
 const auth = useAuth();
+// #endregion
 
 // Data
 const tabGroups = [
@@ -107,12 +112,20 @@ const tabGroups = [
     ],
     [
         {
-            title: auth.isAuthenticated ? 'تسجيل الخروج' : 'تسجيل الدخول',
-            route: auth.isAuthenticated ? 'logout' : 'login',
-            icon: auth.isAuthenticated ? IconLogoutDoor : IconLoginDoor,
+            title: 'تسجيل الخروج',
+            route: 'logout',
+            icon: IconLogoutDoor,
         },
     ],
 ];
+
+const getRoutes = computed(() => {
+    return tabGroups.slice(0, 2);
+});
+
+onMounted(() => {
+    console.log(getRoutes.value);
+});
 </script>
 
 <style scoped>
