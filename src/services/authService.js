@@ -10,7 +10,6 @@ const REQUEST_OPTIONS = {
 
 class AuthService {
   async login(credentials) {
-    alert();
     try {
       const res = await axios.post('/login', JSON.stringify(credentials), REQUEST_OPTIONS);
       return res.data;
@@ -22,7 +21,7 @@ class AuthService {
 
   async logout() {
     try {
-      await axios.post('/logout');
+      await axios.post('/logout', null, REQUEST_OPTIONS);
     } catch (error) {
       console.error('Error logging out:', error);
       throw error;
