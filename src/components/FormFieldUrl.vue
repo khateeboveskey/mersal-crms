@@ -26,11 +26,10 @@
 import { ref, markRaw, reactive, watch } from 'vue';
 import InternetEarth from './icons/InternetEarth.vue';
 import { extractWebsiteName } from '@/helpers/urlHelper';
+import { getOnlyFilled } from '@/helpers/objectHelper';
 import { useIcon } from '@/stores/useIcon';
-import { useObject } from '@/stores/useObject';
 
 const icon = useIcon();
-const obj = useObject();
 
 const props = defineProps({
   required: Boolean,
@@ -67,6 +66,6 @@ watch(social_media_links, () => {
 });
 
 function sendDataToParent() {
-  emit('sendDataToParent', JSON.stringify(obj.getOnlyFilled(socialMediaObject)));
+  emit('sendDataToParent', JSON.stringify(getOnlyFilled(socialMediaObject)));
 }
 </script>

@@ -70,7 +70,7 @@
           <td class="px-6 py-4">
             <div class="flex items-center">
               <a
-                v-for="smLink in obj.parseNested(contact.social_media_links)"
+                v-for="smLink in parseNested(contact.social_media_links)"
                 :key="smLink"
                 target="_blank"
                 class="rounded-lg p-2 text-slate-400 hover:bg-gray-100 dark:text-slate-500 dark:hover:bg-gray-700"
@@ -141,13 +141,12 @@ import IconPenEdit from '@/components/icons/IconPenEdit.vue';
 
 // Stores
 import { extractWebsiteName } from '@/helpers/urlHelper';
+import { parseNested } from '@/helpers/objectHelper';
 import { useIcon } from '@/stores/useIcon';
 import { useData } from '@/stores/useData';
-import { useObject } from '@/stores/useObject';
 
 const icon = useIcon();
 const request = useData();
-const obj = useObject();
 
 // Vue's
 import { onMounted, ref, computed, watch } from 'vue';
