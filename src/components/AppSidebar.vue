@@ -70,8 +70,7 @@ import IconLove from './icons/IconLove.vue';
 import MersalLogo from '@/assets/imgs/MersalLogo.vue';
 import IconLogoutDoor from './icons/IconLogoutDoor.vue';
 import { computed, onMounted } from 'vue';
-import { useAuth } from '@/stores/useAuth';
-const auth = useAuth();
+import auth from '@/services/authService';
 // #endregion
 
 // Data
