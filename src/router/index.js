@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useAuth } from '@/stores/useAuth';
+
 import HomeView from '@/views/HomeView.vue';
 import ContactsView from '@/views/ContactsView.vue';
 import DealsView from '@/views/DealsView.vue';
@@ -67,6 +69,29 @@ const router = createRouter({
             },
         },
     ],
+});
+
+router.beforeEach((to, from, next) => {
+    const auth = useAuth();
+    if (auth.isAuthenticated) {
+        if (to.name === 'login') {
+            next({ name: 'home' });
+        } else if (to.name === 'logout') {
+            auth.logout();
+            location.reload();
+        } else {
+            if (to.meta.title) {
+                document.title = to.meta.title;
+            }
+            next();
+        }
+    } else {
+        if (to.name !== 'login') {
+            next({ name: 'login' });
+        } else {
+            next();
+        }
+    }
 });
 
 export default router;
