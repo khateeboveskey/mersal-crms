@@ -1,4 +1,4 @@
-import { getOnlyFilled, parseNested } from '@/helpers/objectHelper';
+import { getOnlyFilled, parseNested } from '@/utils/object';
 import { describe, expect, it } from 'vitest';
 
 describe('getOnlyFilled', () => {

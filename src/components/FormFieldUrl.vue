@@ -25,8 +25,8 @@
 <script setup>
 import { ref, markRaw, reactive, watch } from 'vue';
 import InternetEarth from './icons/InternetEarth.vue';
-import { extractWebsiteName } from '@/helpers/urlHelper';
-import { getOnlyFilled } from '@/helpers/objectHelper';
+import { extractWebsiteName } from '@/utils/url';
+import { getOnlyFilled } from '@/utils/object';
 import { useIcon } from '@/stores/useIcon';
 
 const icon = useIcon();

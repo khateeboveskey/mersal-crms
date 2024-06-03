@@ -140,8 +140,8 @@ import IconDeleteTrash from '@/components/icons/IconDeleteTrash.vue';
 import IconPenEdit from '@/components/icons/IconPenEdit.vue';
 
 // Stores
-import { extractWebsiteName } from '@/helpers/urlHelper';
-import { parseNested } from '@/helpers/objectHelper';
+import { extractWebsiteName } from '@/utils/url';
+import { parseNested } from '@/utils/object';
 import { useIcon } from '@/stores/useIcon';
 import { useData } from '@/stores/useData';
 
